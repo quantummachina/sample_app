@@ -24,7 +24,7 @@ group :assets do
 
 end
 
-gem 'jquery-rails', '2.0.0'
+#gem 'jquery-rails', '2.0.0' //PROBLEMA?
 
 group :test do
 	gem 'rspec-rails', '2.8.1'
