@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
 	attr_accessible :name, :email, :password, :password_confirmation
 	has_secure_password
     has_many :microposts, dependent: :destroy
+    has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+    has_many :followed_users, through: :relationships, source: :followed
+    has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
 
 	before_save :create_remember_token
 
@@ -22,8 +28,24 @@ class User < ActiveRecord::Base
                       uniqueness: { case_sensitive: false }
     validates :password, length: {minimum: 6}
 
+    #def feed
+    #   Micropost.where("User_id =  ?", id)
+    #end
+
+    def following?(other_user)
+        relationships.find_by_followed_id(other_user.id)
+    end
+
+    def follow!(other_user)
+       relationships.create!(followed_id: other_user.id)
+    end
+
+    def unfollow!(other_user)
+        relationships.find_by_followed_id(other_user.id).destroy
+    end
+
     def feed
-        Micropost.where("User_id =  ?", id)
+        Micropost.from_users_followed_by(self)
     end
 
     private
