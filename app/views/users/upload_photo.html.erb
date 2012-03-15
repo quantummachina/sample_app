@@ -1,0 +1,6 @@
+<h1>File Upload</h1>
+<%= form_for :upload_file, html: {multipart: true} do |f| %>
+	<%= f.file_field :user_photo, accept: 'image/png,image/gif,image/jpeg'  %>
+</br>
+	<%= f.submit "Upload" %>
+<% end %>

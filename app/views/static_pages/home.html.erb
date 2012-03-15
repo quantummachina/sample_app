@@ -1,21 +1,36 @@
 <% provide(:title, 'Home') %>
 
+
 <% if signed_in? %>
-  <table class="front">
-    <tr>
-      <td class="main">
-        <h1 class="micropost">What's up?</h1>
-        <%= render 'shared/micropost_form' %>
-        <%= render 'shared/feed' %>
-      </td>
-      <td class="sidebar round">
-        <%= render 'shared/user_info' %>
-        <%= render 'shared/stats' %>
-      </td>
-    </tr>
-  </table>
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <%= render 'shared/user_info' %>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+    <section>
+          <h1 class="micropost">What's up?</h1>
+          <%= render 'shared/micropost_form' %>
+
+    </section>
+  </aside>
+
+  <div class="span8">
+    <h3> Micropost Feed </h3>
+    <%= render 'shared/feed' %>
+  </div>
+</div>
+
 <% else %>
+
+<div class="center hero-unit">
+
   <h1>FunkApp</h1>
-  <p>This is the home page for the <a href="http://quantummachina.com">Quantum Machina</a> sample application</p>
-  <%= link_to "Sign up now!", signup_path , class: "signup_button round" %>
+  <h2>This is the home page for the <a href="http://funkalab.com/">Funka Lab</a> sample application</h2>
+
+  <%= link_to "Sign up now!", signup_path , class: "btn btn-large btn-primary" %>
+  </div>
 <% end %>

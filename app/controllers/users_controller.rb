@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       redirect_to users_path  
   end
 
-    def following
+  def following
     @title = "Following"
     @user = User.find(params[:id])
     @users = @user.followed_users.paginate(page: params[:page])
@@ -63,6 +63,28 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
+
+=begin
+ def upload_file
+    debbug
+    #  User.save_photo(params[:upload_file][:user_photo])
+   #  render text: "File has been uploaded successfully"
+   etgbdf
+  require 'fileutils'
+   tmp = params[:file_upload][:my_file].tempfile
+    filename = params[:file_upload][:my_file].original_filename
+        directory = "upload/public/data"
+        path = File.join(directory, filename)
+     File.open(path, "wb") { write(params[:user_photo].read) }
+
+  end
+
+  def upload_photo_form
+    render 'upload_photo'
+  end
+
+=end
+
 
   private
 

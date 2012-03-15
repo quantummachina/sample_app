@@ -2,7 +2,7 @@ module ApplicationHelper
 
 	#Returns the full title on a per-page basis.
 	def full_title(page_title)
-		base_title = "Quantum Machina Sample App"
+		base_title = "Funkalab Sample App"
 		if page_title.empty?
 			base_title
 		else

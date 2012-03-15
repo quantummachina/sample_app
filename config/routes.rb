@@ -15,6 +15,8 @@ SampleApp::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/uploadpic', to: 'users#upload_photo'
+  #match '/upload_file' to: '/app/controllers#users_controller'
 
   root to: 'static_pages#home'
   # The priority is based upon order of creation:
