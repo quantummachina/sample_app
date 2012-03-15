@@ -28,7 +28,7 @@ group :assets do
 
 end
 
-gem 'jquery-rails','1.0.19' #'2.0.0' //SOLUCION PARCIAL
+gem 'jquery-rails', '2.0.0' #'1.0.19' //SOLUCION PARCIAL
 
 group :test do
 	gem 'rspec-rails', '2.8.1'
