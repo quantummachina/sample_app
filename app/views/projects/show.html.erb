@@ -1,0 +1,36 @@
+<!-- Muestra cada proyecto: projects/1 -->
+<% provide(:title, @project.name) %>
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for User.find(@project.user_id) %> <!-- cambiar al user presente o ejecutar un mejor m[etodo. Ojo con los stats-->
+        <%= User.find(@project.user_id).name %>
+      </h1>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+
+<h1>
+  <%= @project.name %>
+</h1>
+
+<ul class="thumbnails">
+  <li class="span6">
+    <a href="#" class="thumbnail">
+      <img  src= <%="/projects_cover/#{@project.cover}" %> alt="">
+    </a>
+  </li>
+</ul>
+
+<h2>
+  <%= @project.description %>
+</h2>  
+
+</div>
+    
+  </div>

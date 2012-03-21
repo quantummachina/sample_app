@@ -1,0 +1,18 @@
+<!-- Muestra cada proyecto enlistado -->
+<li class ="span6">
+	<a href= <%= "projects/#{project.id}" %> class="thumbnail">
+		<div class="row">
+			<div class ="span4">
+				<img  src= <%="projects_cover/#{project.cover}" %> 
+				alt= <%= project.name %> >
+			</div>
+			<div class="span1">
+				<h4><%= project.name %></h4>
+				<p><%= project.description %></p>
+				<span class="timestamp">
+					Posted <%= time_ago_in_words(project.created_at) %> ago.
+				</span>
+			</div>
+		</div>
+	</a>
+</li>
