@@ -1,4 +1,9 @@
 class ProjectsController < ApplicationController
+
+  #before_filter y after_filter
+
+  before_filter :load_filename
+  after_filter :save_filename
 #agregar filtro de correct_user para destroy
 
 #require 'projects_helper'
@@ -21,8 +26,8 @@ class ProjectsController < ApplicationController
   def create
     #independiente de la subida de archivo
     @project = current_user.projects.build(params[:project])
-    #@project.cover = "ABCDE" asignaci[on s[i funciona]]
-    set_name
+    @project.cover = @filename
+    
 
 
     if @project.save
@@ -47,7 +52,7 @@ class ProjectsController < ApplicationController
      File.open(path, "wb").write(params[:cover_file].read)
      #@project.cover = filename
      #redireccionar o parcial.
-     set_name=(filename)
+     @filename = filename
 
     respond_to do |format|
       format.html { redirect_to '/start_project' } #funciona sin ajax
@@ -55,6 +60,15 @@ class ProjectsController < ApplicationController
     end
 
   end
+
+  private
+    def load_filename
+      @filename = session[:filename] || ""
+    end
+
+    def save_filename
+      session[:filename] = @filename
+    end
 
 end
 #Utilizar un private para pasar el nombre de la imagen.

@@ -130,6 +130,7 @@ GEM
     rb-notifu (0.0.4)
     rdoc (3.12)
       json (~> 1.4)
+    remotipart (1.0.2)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   rails (= 3.2.1)
   rb-fchange (= 0.0.5)
   rb-notifu (= 0.0.4)
+  remotipart (~> 1.0)
   rspec-rails (= 2.8.1)
   ruby-debug19
   sass-rails (= 3.2.4)

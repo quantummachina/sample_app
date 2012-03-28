@@ -1,8 +1,1 @@
-wehdjgukj
-$("#upload_cover").html(("<%= escape_javascript(<ul class="thumbnails">
-  <li class="span6">
-    <a href="#" class="thumbnail">
-      <img  src= <%="/projects_cover/#{@project.cover}" %> alt="">
-    </a>
-  </li>
-</ul>) %>")
+$("#upload_cover").html("<%= escape_javascript(render('projects/thumbnail'))%>")
