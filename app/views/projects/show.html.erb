@@ -31,6 +31,12 @@
   <%= @project.description %>
 </h2>  
 
+<% if current_user?(@project.user) %>
+      <%= link_to "delete", @project, method: :delete,
+                                       confirm: "You sure?",
+                                       title: @project.name %>
+  <% end %>
+
 </div>
     
   </div>

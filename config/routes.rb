@@ -21,6 +21,8 @@ SampleApp::Application.routes.draw do
   match '/uploadpic', to: 'users#upload_photo'
   #match '/upload_file' to: '/app/controllers#users_controller'
   #match '/user_projects', to: 'static_pages#show_projects'
+  match '/start_project', to: 'projects#new'
+  match '/upload_cover', to: 'projects#upload_cover'
 
   root to: 'static_pages#home'
   # The priority is based upon order of creation:

@@ -3,7 +3,7 @@ class Project < ActiveRecord::Base
 
 	belongs_to:user
 
-	#validates :name, lenght: { maximum: 50}
+	validates :name, presence: true #lenght: { maximum: 50}
 	validates :user_id, presence: true
 	#validates :description, lenght: { maximum: 500}
 

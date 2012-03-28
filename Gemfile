@@ -5,6 +5,7 @@ gem 'bootstrap-sass', '2.0.0'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
+#gem "remotipart", "~> 1.0"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -14,6 +15,7 @@ group :development, :test do
 	gem 'annotate', '~> 2.4.1.beta'
 	gem 'rspec-rails', '2.8.1'
 	gem 'guard-rspec', '0.5.5'
+	gem 'ruby-debug19', :require => 'ruby-debug'
 end
 
 # Gems used only for assets and not required
