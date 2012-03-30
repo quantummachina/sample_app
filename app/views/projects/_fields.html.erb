@@ -1,0 +1,21 @@
+<%= form_for(@project) do |f| %>
+
+	  <%= render 'shared/error_messages', object: f.object %>
+
+	  <%= f.label :name %>
+  	  <%= f.text_field :name %>
+
+  	  <%= f.label :description %>
+  	  <%= f.text_area :description %>
+
+      <%= f.label :category, "Please choose a category:" %>
+      <%= f.select :category, categories %>
+
+      <%= f.check_box :profitable %>
+      <%= f.label :profitable, "This project is profitable", class: "help-inline" %>
+      </br>
+      <%= f.label :tags, "Tags: separate with colon" %>
+      <%= f.text_field :tags %>
+
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+	<% end %>

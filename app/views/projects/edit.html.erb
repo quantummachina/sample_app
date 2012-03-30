@@ -1,0 +1,13 @@
+<% provide :title, "Edit project" %> 
+<h1>Edit project</h1>
+<h2><%= @project.name %></h2>
+
+<div class="row">
+  <div class = "span6 offset3">
+
+  <%= render 'projects/thumbnail' %>
+  <%= render 'upload_cover' %>
+  <%= render 'fields' %>
+	
+  </div>
+</div>

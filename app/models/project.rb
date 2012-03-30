@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-	attr_accessible :name, :description, :cover
+	attr_accessible :name, :description, :cover, :profitable, :category, :tags
 
 	belongs_to:user
 

@@ -26,15 +26,30 @@
     </a>
   </li>
 </ul>
+<h4>
+  Category: <span class="label label-info"><%= num2cat(@project.category) %></span>
 
+</h4>
+  </br>
 <h2>
   <%= @project.description %>
 </h2>  
-
-<% if current_user?(@project.user) %>
+<h3>
+  This is a <%=profit?(@project.profitable)%> project 
+</h3>
+</br>
+<h4>
+  Tags: 
+  <% tag_split(@project.tags).each do |t| %>
+      <span class="label"><%= t %></span>
+  <% end %>
+</h4>
+</br>
+  <% if current_user?(@project.user) %>
       <%= link_to "delete", @project, method: :delete,
-                                       confirm: "You sure?",
+                                       confirm: "No please! we won't survive without it :'(",
                                        title: @project.name %>
+      <%= link_to "edit", edit_project_path(@project) %>
   <% end %>
 
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321001601) do
+ActiveRecord::Schema.define(:version => 20120329005441) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -29,8 +29,13 @@ ActiveRecord::Schema.define(:version => 20120321001601) do
     t.string   "cover"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "profitable"
+    t.integer  "category"
+    t.string   "tags"
   end
 
+  add_index "projects", ["category"], :name => "index_projects_on_category"
+  add_index "projects", ["profitable"], :name => "index_projects_on_profitable"
   add_index "projects", ["user_id", "created_at"], :name => "index_projects_on_user_id_and_created_at"
 
   create_table "relationships", :force => true do |t|
