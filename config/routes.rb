@@ -1,5 +1,7 @@
 SampleApp::Application.routes.draw do
 
+  resources :categories
+
   #get "projects/new"
 
   resources :users do
@@ -23,6 +25,8 @@ SampleApp::Application.routes.draw do
   #match '/user_projects', to: 'static_pages#show_projects'
   match '/start_project', to: 'projects#new'
   match '/upload_cover', to: 'projects#upload_cover'
+  match '/nav', to: 'projects#nav'
+  match '/sort', to: 'projects#sort'
 
   root to: 'static_pages#home'
   # The priority is based upon order of creation:

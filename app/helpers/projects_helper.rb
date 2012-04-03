@@ -28,7 +28,7 @@ module ProjectsHelper
 	end
 
 	def categories #Repetido en el controlador
-		catalog = ["Art", "Technology", "Music", "Film", "Photography", "Dance", "Design", "Games", "Publishin", "Theater"] #0..9
+		catalog = ["Art", "Technology", "Music", "Film", "Photography", "Dance", "Design", "Games", "Publishing", "Theater", "Other"] #0..9
 		return catalog
 	end
 

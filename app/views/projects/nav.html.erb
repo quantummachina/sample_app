@@ -1,0 +1,45 @@
+<% provide(:title, "All Projects") %>
+<div class="row-fluid">
+ <div class="span12">
+
+  <div class="row-fluid">
+   <div class="span2">
+   	<section>
+		<h3>Show</h3>
+		<%= form_tag '/nav' do%>
+		<%= select_tag "category", options_from_collection_for_select(@categories, "id", "name"), multiple: false%>
+		<%= submit_tag "sort"%>
+		<% end %>
+	</section>
+
+	<section>
+		<h2>Text</h2>
+	</section>
+   </div>
+<!--h1>All projects</h1-->
+   <div class="span10">
+<!-- Desde aqui se debe hacer interactivo-->
+    <%= will_paginate %>
+
+    <ul class="thumbnails"> <!-- generar class projects-->
+	 <% @projects.each do |project| %>
+	   <li class ="span2">
+			<a href= <%= "projects/#{project.id}" %> class="thumbnail">
+				<!--div class="thumbnail"  %-->
+						<img  src= <%="projects_cover/#{project.cover}" %> 
+						alt= <%= project.name %> >
+						<h4><%= wrap(project.name[0..24]) %></h4>
+						<h5><%= wrap(project.description[0..40]) %></h5>
+						<span class="timestamp">
+							Posted <%= time_ago_in_words(project.created_at) %> ago.
+						</span>
+				</a>
+		</li>
+
+	 <% end %>
+    </ul>
+    <%= will_paginate %>
+   </div>
+  </div>
+ </div>
+</div>

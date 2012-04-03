@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_filter :load_filename
   after_filter :save_filename
-#agregar filtro de correct_user para destroy
+  #agregar filtro de correct_user para destroy
 
   def show
   	@project = Project.find(params[:id])
@@ -14,11 +14,13 @@ class ProjectsController < ApplicationController
 
   def new
   	@project = Project.new
+    @categories = Category.all
+    @project.category_id=1 #default "other"
   end
 
   def create
     #independiente de la subida de archivo
-    @project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category: cat2num(params[:project][:category])) #Reemplazar pamas project, por la forma completa desglosada
+    @project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category]) #Reemplazar pamas project, por la forma completa desglosada
     #@project.cover = @filename
 
     if @project.save
@@ -37,6 +39,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = current_user.projects.find(params[:id])
+    @categories = Category.all
     @filename = @project.cover
   end
 
@@ -45,12 +48,33 @@ class ProjectsController < ApplicationController
     if @filename != @project.cover
       @project.cover=@filename
     end
-    if @project.update_attributes(params[:project])
+
+    if @project.update_attributes(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category])
       flash[:success] = "Project updated"
       redirect_to @project
     else
       render 'edit'
     end
+  end
+
+  def nav
+#    debugger
+    cat_indx = params[:category] || 0
+    @categories = Category.all
+    if cat_indx == 0
+      @projects = Project.paginate(page: params[:page])
+    else
+      #for i in cat_indx
+      #  @projects += Category.find(i).projects
+      #end
+
+      #current_category = Category.find(cat_indx) current_category.projects
+      @projects = Category.find(cat_indx).projects.paginate(page: params[:page]) 
+    end
+
+  end
+
+  def sort
   end
 
   #Idea para integrar el file uploaded con un [unico bot[on]]
@@ -90,9 +114,11 @@ class ProjectsController < ApplicationController
     if cat == "Other"
       return 99
     else
-      catalog = ["Art", "Technology", "Music", "Film", "Photography", "Dance", "Design", "Games", "Publishin", "Theater"] #0..9
-      catalog.index(cat)
+      catalog = ["Art", "Technology", "Music", "Film", "Photography", "Dance", "Design", "Games", "Publishing", "Theater"] #0..9
+     return catalog.index(cat)
     end
+
+    
 
   end
 

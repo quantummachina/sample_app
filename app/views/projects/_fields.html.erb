@@ -9,7 +9,7 @@
   	  <%= f.text_area :description %>
 
       <%= f.label :category, "Please choose a category:" %>
-      <%= f.select :category, categories %>
+      <%= f.select :category, options_from_collection_for_select(@categories, "id", "name", selected: @project.category.id) %> <!-- selected: @project.category.name  -->
 
       <%= f.check_box :profitable %>
       <%= f.label :profitable, "This project is profitable", class: "help-inline" %>

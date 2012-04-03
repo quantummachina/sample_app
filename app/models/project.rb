@@ -1,7 +1,9 @@
 class Project < ActiveRecord::Base
-	attr_accessible :name, :description, :cover, :profitable, :category, :tags
+	attr_accessible :name, :description, :cover, :profitable, :category_id , :tags
 
-	belongs_to:user
+	belongs_to :user
+
+	belongs_to :category
 
 	validates :name, presence: true #lenght: { maximum: 50}
 	validates :user_id, presence: true
