@@ -7,8 +7,6 @@ class AddSeveralFields < ActiveRecord::Migration
   	add_column :projects, :online, :boolean, default: true
   	add_column :projects, :place, :string
   	add_column :projects, :finished, :boolean, default: false
-
-add_index :tags, :phrase, unique: true
   end
 
   def down
