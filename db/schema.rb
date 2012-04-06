@@ -11,13 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403184658) do
+ActiveRecord::Schema.define(:version => 20120405024726) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "collabs", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "collabs", ["project_id", "user_id"], :name => "index_collabs_on_project_id_and_user_id", :unique => true
+  add_index "collabs", ["project_id"], :name => "index_collabs_on_project_id"
+  add_index "collabs", ["user_id"], :name => "index_collabs_on_user_id"
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -33,11 +44,14 @@ ActiveRecord::Schema.define(:version => 20120403184658) do
     t.integer  "user_id"
     t.string   "description"
     t.string   "cover"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.boolean  "profitable"
     t.integer  "category_id"
     t.string   "tags"
+    t.boolean  "online",      :default => true
+    t.string   "place"
+    t.boolean  "finished",    :default => false
   end
 
   add_index "projects", ["category_id"], :name => "index_projects_on_category"
@@ -55,6 +69,34 @@ ActiveRecord::Schema.define(:version => 20120403184658) do
   add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
+  create_table "resources", :force => true do |t|
+    t.string   "filename"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "resources", ["project_id"], :name => "index_resources_on_project_id"
+
+  create_table "tag_rels", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tag_rels", ["project_id", "tag_id"], :name => "index_tag_rels_on_project_id_and_tag_id", :unique => true
+  add_index "tag_rels", ["project_id"], :name => "index_tag_rels_on_project_id"
+  add_index "tag_rels", ["tag_id"], :name => "index_tag_rels_on_tag_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "phrase"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "tags", ["phrase"], :name => "index_tags_on_phrase", :unique => true
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -63,6 +105,9 @@ ActiveRecord::Schema.define(:version => 20120403184658) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           :default => false
+    t.string   "place"
+    t.string   "webpage"
+    t.string   "whatido"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

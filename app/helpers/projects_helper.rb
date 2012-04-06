@@ -6,6 +6,27 @@ module ProjectsHelper
 			"non profitable"
 		end
 	end
+	def online?(online)
+		if online
+			"online"
+		else
+			"offline"
+		end
+	end
+	def finished?(finished)
+		if finished
+			"finished"
+		else
+			"unfinished"
+		end
+	end
+	def place?(place)
+		if place != ""
+			true
+		else
+			false
+		end
+	end
 	def num2cat(num)
 		#num /= 100
 		case num

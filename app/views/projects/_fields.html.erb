@@ -13,9 +13,18 @@
 
       <%= f.check_box :profitable %>
       <%= f.label :profitable, "This project is profitable", class: "help-inline" %>
+      <%= f.check_box :online %>
+      <%= f.label :online, "This is an online project", class: "help-inline" %>
       </br>
+      <%= f.label :place, "This project runs at" %>
+      <%= f.text_field :place, placeholder: "Type a city" %>
+
       <%= f.label :tags, "Tags: separate with colon" %>
       <%= f.text_field :tags %>
+
+<%= f.check_box :finished %>
+      <%= f.label :finished, "Mark this project as finished", class: "help-inline" %>
+      </br>
 
       <%= f.submit "Save", class: "btn btn-large btn-primary" %>
 	<% end %>

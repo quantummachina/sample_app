@@ -10,7 +10,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :password, :password_confirmation
+	attr_accessible :name, :email, :password, :password_confirmation, :place, :whatido, :webpage
 	has_secure_password
     has_many :microposts, dependent: :destroy
     has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -20,6 +20,9 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
     has_many :followers, through: :reverse_relationships, source: :follower
     has_many :projects #,dependent: :destroy
+
+    has_many :reverse_collabs, dependent: :destroy
+    has_many :collaborations, through: :reverse_collabs #reverse?
 
 	before_save :create_remember_token
 

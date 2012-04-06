@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
 
   def create
     #independiente de la subida de archivo
-    @project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category]) #Reemplazar pamas project, por la forma completa desglosada
+    @project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category], online: params[:project][:online], finished: params[:project][:finished], place: params[:project][:place]) #Reemplazar pamas project, por la forma completa desglosada
     #@project.cover = @filename
 
     if @project.save
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
       @project.cover=@filename
     end
 
-    if @project.update_attributes(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category])
+    if @project.update_attributes(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category], online: params[:project][:online], finished: params[:project][:finished], place: params[:project][:place])
       flash[:success] = "Project updated"
       redirect_to @project
     else
@@ -99,6 +99,16 @@ class ProjectsController < ApplicationController
       format.js
     end
 
+  end
+
+  def collab!(a_user)
+    collabs.create!(a_user)
+  end
+  def uncollab!(a_user)
+    collabs.find_by_user_id(a_user.id).destroy
+  end
+  def collab? (a_user)
+    collabs.find_by_user_id(a_user.id)
   end
 
   private

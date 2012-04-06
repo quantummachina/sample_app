@@ -6,7 +6,7 @@
     <section>
       <h1>
         <%= gravatar_for User.find(@project.user_id) %> <!-- cambiar al user presente o ejecutar un mejor m[etodo. Ojo con los stats-->
-        <%= User.find(@project.user_id).name %>
+        <%= link_to User.find(@project.user_id).name, User.find(@project.user_id) %>
       </h1>
     </section>
     <section>
@@ -28,7 +28,6 @@
 </ul>
 <h4>
   Category: <span class="label label-info"><%= @project.category.name %></span>
-
 </h4>
   </br>
 <h2>
@@ -36,6 +35,17 @@
 </h2>  
 <h3>
   This is a <%=profit?(@project.profitable)%> project 
+</h3>
+<h3>
+  This is an <%=online?(@project.online)%> project 
+</h3>
+<h3>
+  <% if @project.place != "" %>
+  <%= "This project currently running at " + @project.place %>
+  <% end %>
+</h3>
+<h3>
+  This is a <%=finished?(@project.finished)%> project 
 </h3>
 </br>
 <h4>
