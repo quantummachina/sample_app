@@ -27,7 +27,7 @@
   </li>
 </ul>
 <h4>
-  Category: <span class="label label-info"><%= @project.category.name %></span>
+  Category: <span class="label label-info"><%= link_to @project.category.name, nav_path(category: @project.category)  %></span>
 </h4>
   </br>
 <h2>

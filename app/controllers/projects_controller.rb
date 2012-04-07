@@ -59,18 +59,31 @@ class ProjectsController < ApplicationController
 
   def nav
 #    debugger
-    cat_indx = params[:category] || 0
-    @categories = Category.all
-    if cat_indx == 0
-      @projects = Project.paginate(page: params[:page])
-    else
-      #for i in cat_indx
-      #  @projects += Category.find(i).projects
-      #end
+    cat_indx = params[:category] || ""
+    onln = params[:online] || true
+    offln = params[:offline] || true
+    @categories = Category.all #TODAS
 
-      #current_category = Category.find(cat_indx) current_category.projects
-      @projects = Category.find(cat_indx).projects.paginate(page: params[:page]) 
-    end
+    if params[:search]
+      @projects = Project.search_pro(params[:search])
+    else
+
+    
+     if cat_indx == ""
+      @projects = Project.paginate(page: params[:page])
+     else #UNA CATEGORIA
+      @projects = Category.find(cat_indx).projects.paginate(page: params[:page])
+      end
+      @cat_indx=cat_indx
+
+     if onln
+      @p1 = @projects.find_all_by_online(true)
+      end
+      if offln
+      @p2 = @projects.find_all_by_online(false)
+       end
+
+  end
 
   end
 

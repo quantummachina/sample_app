@@ -5,13 +5,6 @@
       <!-- Nota: el demo usa texto en vez de logo -->
       <nav>
         <ul class="nav pull-right">
-          <li>
-            <form class=" form-search">
-              <%= text_field_tag :search, params[:search], class: "input-medium search-query" %>
-              <%= submit_tag "Search", name: nil,  class: "btn" %>
-            </form>            
-          </li>
-          
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Help", help_path %></li>
 
@@ -31,9 +24,6 @@
                 <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
               </ul>
             </li>
-
-            <li><a class="btn btn-warning" data-toggle="modal" href="#myModal" >Idea!</a> </li>
-
           <% else %>
           <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
@@ -41,21 +31,4 @@
       </nav>
     </div>
   </div>
-
 </header>
-
-  <div class="modal hide fade" id="myModal">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">×</a>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p><h3> Post an Idea! </h3></p>
-    <p> <%= text_area_tag :idea %> </p>
-  </div>
-  <div class="modal-footer">
-    <a  data-dismiss="modal" href="#" class="btn">Close</a>
-    <a href="#" class="btn btn-info">Save</a>
-    <a href="#" class="btn btn-primary">Post!</a>
-  </div>
-</div>

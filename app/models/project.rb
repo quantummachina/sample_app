@@ -13,4 +13,12 @@ class Project < ActiveRecord::Base
 	has_many :collaborators, through: :collabs, source: :user_id
 
 	default_scope order: 'projects.created_at DESC'
+
+	def self.search_pro(search)
+		if search
+			find(:all, conditions: ['name LIKE ?', "%#{search}%"])
+		else
+			find(:all)
+		end
+	end
 end
