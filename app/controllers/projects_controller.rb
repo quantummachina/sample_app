@@ -57,8 +57,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def nav
-#    debugger
+  def nav #WORK TO DO! Ref> Behance
     cat_indx = params[:category] || ""
     onln = params[:online] || true
     offln = params[:offline] || true
@@ -83,7 +82,7 @@ class ProjectsController < ApplicationController
       @p2 = @projects.find_all_by_online(false)
        end
 
-  end
+    end
 
   end
 
@@ -132,18 +131,6 @@ class ProjectsController < ApplicationController
     def save_filename
       session[:filename] = @filename
     end
-
-    def cat2num(cat) #Repetido en la vista
-    if cat == "Other"
-      return 99
-    else
-      catalog = ["Art", "Technology", "Music", "Film", "Photography", "Dance", "Design", "Games", "Publishing", "Theater"] #0..9
-     return catalog.index(cat)
-    end
-
-    
-
-  end
 
 end
 #Utilizar un private para pasar el nombre de la imagen.

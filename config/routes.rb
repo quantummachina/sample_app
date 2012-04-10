@@ -6,13 +6,20 @@ SampleApp::Application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :collaborations
     end
   end
+
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only:[:create, :destroy]
-  resources :projects
+  resources :collabs, only:[:create, :destroy]
+  resources :projects do
+    member do
+      get :collaborators
+    end
+  end
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'

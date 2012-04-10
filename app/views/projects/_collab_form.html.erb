@@ -1,0 +1,7 @@
+  <div id="collab_form">
+  <% if current_user.collab?(@project) %>
+    <%= render 'uncollab' %>
+  <% else %>
+    <%= render 'collab' %>
+  <% end %>
+  </div>

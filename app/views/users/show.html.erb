@@ -33,7 +33,7 @@
 
   <div class="span8">
 
-     <h3>Projects (<%= @user.projects.count %>)</h3>
+     <h3>Owned Projects (<%= @user.projects.count %>)</h3>
    </br>
 
     <ul class="thumbnails"> <!-- generar class projects-->
@@ -55,6 +55,27 @@
     </ul>
     <%= will_paginate @projects, param_name: :projects_page%>
 
+<% if @user.collaborations %>
+  </br>
+  <h3>Collaborations (<%= @user.collaborations.count %>)</h3>
+   </br>
+ <ul class="thumbnails">
+<% @user.collaborations.each do |c| %>
+     <li class ="span2">
+      <a href= <%= "/projects/#{c.id}" %> class="thumbnail">
+        <!--div class="thumbnail"  %-->
+            <img  src= <%="/projects_cover/#{c.cover}" %> 
+            alt= <%= c.name %> >
+            <h4><%= wrap(c.name[0..24]) %></h4>
+            <h5><%= wrap(c.description[0..40]) %></h5>
+            <span class="timestamp">
+              Posted <%= time_ago_in_words(c.created_at) %> ago.
+            </span>
+        </a>
+    </li>
+     <% end %>
+    </ul>
+<% end %>
   </div>
     
   </div>

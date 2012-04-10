@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
     has_many :followers, through: :reverse_relationships, source: :follower
     has_many :projects #,dependent: :destroy
 
-    has_many :reverse_collabs, dependent: :destroy
-    has_many :collaborations, through: :reverse_collabs #reverse?
+    has_many :collabs #, class_name: "Collab" #foreign_key: "user_id", dependent: :destroy
+    has_many :collaborations, through: :collabs, source: :project #reverse?
 
 	before_save :create_remember_token
 
@@ -50,6 +50,18 @@ class User < ActiveRecord::Base
 
     def feed
         Micropost.from_users_followed_by(self)
+    end
+
+    def join!(project)
+        collabs.create!(project_id: project.id)
+    end
+
+    def leave!(project)
+        collabs.find_by_project_id(project.id).destroy
+    end
+
+    def collab?(project)
+       collabs.find_by_project_id(project.id) 
     end
 
     private

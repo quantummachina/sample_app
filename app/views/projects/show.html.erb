@@ -2,7 +2,7 @@
 <% provide(:title, @project.name) %>
 
 <div class="row">
-  <aside class="span4">
+  <aside class="span3">
     <section>
       <h1>
         <%= gravatar_for User.find(@project.user_id) %> <!-- cambiar al user presente o ejecutar un mejor m[etodo. Ojo con los stats-->
@@ -13,7 +13,11 @@
       <%= render 'shared/stats' %>
     </section>
   </aside>
-  <div class="span8">
+  <div class="span9">
+
+<% if @project.finished != true %>
+  <%= render 'collab_form' %>
+<% end %>
 
 <h1>
   <%= @project.name %>
@@ -32,7 +36,17 @@
   </br>
 <h2>
   <%= @project.description %>
-</h2>  
+</h2>
+
+<% if @project.collaborators %>
+<h3> Collaborators: </h3>
+  <% @project.collaborators.each do |c| %>
+   <span class="label"> <%= link_to c.name, c %> </span>
+   <% end %>
+ </h3>
+<% end %>
+   
+
 <h3>
   This is a <%=profit?(@project.profitable)%> project 
 </h3>

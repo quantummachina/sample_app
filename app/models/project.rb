@@ -10,11 +10,11 @@ class Project < ActiveRecord::Base
 	#validates :description, lenght: { maximum: 500}
 
 	has_many :collabs, dependent: :destroy #foreign_key: ""
-	has_many :collaborators, through: :collabs, source: :user_id
+	has_many :collaborators, through: :collabs, source: :user
 
 	default_scope order: 'projects.created_at DESC'
 
-	def self.search_pro(search)
+	def self.search_pro(search) #Ampliar conforme se desarrolle el nav
 		if search
 			find(:all, conditions: ['name LIKE ?', "%#{search}%"])
 		else
