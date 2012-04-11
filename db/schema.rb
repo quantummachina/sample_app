@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120405024726) do
+ActiveRecord::Schema.define(:version => 20120410203010) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -70,10 +70,11 @@ ActiveRecord::Schema.define(:version => 20120405024726) do
   add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
 
   create_table "resources", :force => true do |t|
-    t.string   "filename"
+    t.string   "content"
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.string   "content_html", :default => ""
   end
 
   add_index "resources", ["project_id"], :name => "index_resources_on_project_id"

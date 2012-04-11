@@ -15,9 +15,10 @@ SampleApp::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only:[:create, :destroy]
   resources :collabs, only:[:create, :destroy]
+  resources :resources, only:[:create, :destroy]
   resources :projects do
     member do
-      get :collaborators
+      get :collaborators, :resources
     end
   end
 

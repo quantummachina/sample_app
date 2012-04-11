@@ -12,6 +12,8 @@ class Project < ActiveRecord::Base
 	has_many :collabs, dependent: :destroy #foreign_key: ""
 	has_many :collaborators, through: :collabs, source: :user
 
+	has_many :resources
+
 	default_scope order: 'projects.created_at DESC'
 
 	def self.search_pro(search) #Ampliar conforme se desarrolle el nav

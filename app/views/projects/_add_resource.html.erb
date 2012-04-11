@@ -1,0 +1,8 @@
+<%= form_for @project.resources.build(project_id: @project.id) do |f| %>
+
+<div><%= f.hidden_field :project_id %></div>
+
+ <%= f.text_field :content %>
+
+  <%= f.submit "Append",class: "btn btn-large btn-primary" %>
+<% end %>

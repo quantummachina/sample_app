@@ -12,8 +12,34 @@
     <section>
       <%= render 'shared/stats' %>
     </section>
+  <section>
+
+    <h3>Owned Projects (<%= User.find(@project.user_id).projects.count %>)</h3>
+   </br>
+
+    <ul class="thumbnails"> <!-- generar class projects-->
+   <% User.find(@project.user_id).projects.each do |project| %>
+     <li class ="span3">
+      <a href= <%= "/projects/#{project.id}" %> class="thumbnail">
+        <!--div class="thumbnail"  %-->
+            <img  src= <%="/projects_cover/#{project.cover}" %> 
+            alt= <%= project.name %> >
+            <h4><%= wrap(project.name[0..24]) %></h4>
+            <h5><%= wrap(project.description[0..40]) %></h5>
+            <span class="timestamp">
+              Posted <%= time_ago_in_words(project.created_at) %> ago.
+            </span>
+        </a>
+    </li>
+
+   <% end %>
+    </ul>
+ 
+  </section>
+
   </aside>
-  <div class="span9">
+
+  <div class="span6">
 
 <% if @project.finished != true %>
   <%= render 'collab_form' %>
@@ -69,6 +95,7 @@
   <% end %>
 </h4>
 </br>
+
   <% if current_user?(@project.user) %>
       <%= link_to "delete", @project, method: :delete,
                                        confirm: "No please! we won't survive without it :'(",
@@ -77,5 +104,26 @@
   <% end %>
 
 </div>
+
+  <div class="span3">
+    <h3>Resources</h3>
+    <% if @project.resources %>
+      <% for resource in @project.resources.each do %>
+        <li><%= resource.content_html %>
+        <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+          <!--%= render 'del_resource'%-->
+          <%= link_to "[x]", @project.resources.find(resource.id), method: :delete,
+                                       confirm: "This will remove current resource, please confirm.",
+                                       title: @project.name%>
+        <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </br>
+
+  <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+    <%= render 'add_resource' %>
+  <% end %>
+  </div>
     
   </div>
