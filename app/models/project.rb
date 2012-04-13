@@ -13,6 +13,7 @@ class Project < ActiveRecord::Base
 	has_many :collaborators, through: :collabs, source: :user
 
 	has_many :resources
+	has_many :needs
 
 	default_scope order: 'projects.created_at DESC'
 
