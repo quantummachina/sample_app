@@ -15,6 +15,10 @@ class Project < ActiveRecord::Base
 	has_many :resources
 	has_many :needs
 
+	has_many :comments
+	has_many :likes, dependent: :destroy
+	#has_many : vale la pena poner "user trroug likes?"
+
 	default_scope order: 'projects.created_at DESC'
 
 	def self.search_pro(search) #Ampliar conforme se desarrolle el nav

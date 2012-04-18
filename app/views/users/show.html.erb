@@ -33,6 +33,51 @@
 
   <div class="span8">
 
+<% if @user.ideas %>
+  </br>
+  <h3>Ideas! (<%= @user.ideas.count %>)</h3>
+   </br>
+   <ul class="thumbnails">
+  <% @user.ideas.each do |c| %>
+    <li class ="span4">
+      <h4> <%= c.thought %> </h4>
+      <span class="timestamp">
+              Thought <%= time_ago_in_words(c.created_at) %> ago.
+            </span>
+            <% if @user == current_user %>
+            <%= link_to "[Publish]", c, method: :publish %>
+        <%= link_to "[x]", c, method: :delete,
+                                         confirm: "Isn't a valuable idea anymore?",
+                                         title: @user.name%>
+                                         <% end %>
+    </li>
+    <% end %>
+  </ul>
+  <% end %>
+
+<% if @user.likes %>
+  </br>
+  <h3>Liked Projects (<%= @user.liked_projects.count %>)</h3>
+   </br>
+ <ul class="thumbnails">
+<% @user.liked_projects.each do |c| %>
+     <li class ="span2">
+      <a href= <%= "/projects/#{c.id}" %> class="thumbnail">
+        <!--div class="thumbnail"  %-->
+            <img  src= <%="/projects_cover/#{c.cover}" %> 
+            alt= <%= c.name %> >
+            <h4><%= wrap(c.name[0..24]) %></h4>
+            <h5><%= wrap(c.description[0..40]) %></h5>
+            <span class="timestamp">
+              Posted <%= time_ago_in_words(c.created_at) %> ago.
+            </span>
+        </a>
+    </li>
+     <% end %>
+    </ul>
+<% end %>
+
+
      <h3>Owned Projects (<%= @user.projects.count %>)</h3>
    </br>
 

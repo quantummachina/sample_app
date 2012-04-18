@@ -7,13 +7,18 @@
   </div>
   <div class="modal-body">
     <p><h3> Post an new need</h3></p>
-    <%= form_for(@need) do |f|%>
+    <%= form_for @project.needs.build(project_id: @project.id) do |f|%>
     <%= f.hidden_field :project_id %>
     <%= f.label :title %>
     <%= f.text_field :title %>
     <%= f.label :description %>
     <%= f.text_area :description %>
-
+    <%= f.label :reward %>
+    <%= f.text_area :reward %>
+    <%= f.label :place %>
+    <%= f.text_field :place %>
+    <%= f.label :anywhere %>
+    <%= f.check_box :anywhere %>
   </div>
   <div class="modal-footer">
 

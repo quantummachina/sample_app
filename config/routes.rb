@@ -1,5 +1,19 @@
 SampleApp::Application.routes.draw do
 
+  get "likes/create"
+
+  get "likes/destroy"
+
+  get "comments/create"
+
+  get "comments/destroy"
+
+  get "ideas/create"
+
+  get "ideas/index"
+
+  get "ideas/destroy"
+
   resources :categories
 
   #get "projects/new"
@@ -17,6 +31,11 @@ SampleApp::Application.routes.draw do
   resources :collabs, only:[:create, :destroy]
   resources :resources, only:[:create, :destroy]
   resources :needs
+
+  resources :ideas, only:[:create, :destroy, :post]
+  resources :likes, only:[:create, :destroy]
+  resources :comments, only:[:create, :destroy]
+
   resources :projects do
     member do
       get :collaborators, :resources

@@ -42,10 +42,15 @@
 <!-- CUERPO -->
 
   <div class="span6">
-
+<table>
+  <td>
 <% if @project.finished != true %>
   <%= render 'collab_form' %>
 <% end %>
+</td>
+<td><%= render 'like_form' %></td>
+</table>
+
 <h1>
   <%= @project.name %>
 </h1>
@@ -105,33 +110,55 @@
   <% end %>
 </br>
 
-  <% if @project.resources %>
-  <h3>Needs:</h3>
-    <%for need in @project.needs.each do %>
-    <ol>
-      <h4><%= need.title %></h4>
-      <p><%= need.description %></p>
-      <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-      <%= link_to "[x]", need, method: :delete,
-                                       confirm: "This will remove current need, please confirm.",
-                                       title: @project.name%>
-                                       <% end %>
-    </ol>
+  <% if @project.finished %>
+
+
+<h3>Comments:</h3>
+    <% if @project.comments %>
+      <% for comment in @project.comments do %>
+      <ol>
+        <h4><%= link_to comment.user.name, comment.user %>, said:
+        <p><%= comment.content %></p>
+        <% if @user.id == @project.user.id || @user.id == comment.user.id %>
+        <%= link_to "[x]", comment, method: :delete,
+                                         title: @project.name%>
+                                         <% end %>
+      </ol>
+      <% end %>
+    <% end %>
+    <%= render 'post_comment' %>
+
+  <% else %>
+
+    <h3>Needs:</h3>
+    <% if @project.needs %>
+      <% for need in @project.needs do %>
+      <ol>
+        <h4><%= need.title %>, @ <%= if need.anywhere ; "Anywhere" else need.place end %></h4>
+        <p><%= need.description %></p>
+        <p> REWARD: <%= need.reward %></p>
+        <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+        <%= link_to "[x]", need, method: :delete,
+                                         confirm: "This will remove current need, please confirm.",
+                                         title: @project.name%>
+                                         <% end %>
+      </ol>
+      <% end %>
+
     <% end %>
 
+    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+        <%= render 'post_need' %>
+      <% end %>
   <% end %>
-
-<% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-    <%= render 'post_need' %>
-  <% end %>
-</div>
+  </div>
 
 <!--DERECHO-->
 
   <div class="span3">
     <h3>Resources</h3>
     <% if @project.resources %>
-      <% for resource in @project.resources.each do %>
+      <% for resource in @project.resources do %>
         <ol><%= resource.content_html %>
         <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
           <!--%= render 'del_resource'%-->

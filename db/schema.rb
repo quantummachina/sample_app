@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412005207) do
+ActiveRecord::Schema.define(:version => 20120418014356) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -30,6 +30,36 @@ ActiveRecord::Schema.define(:version => 20120412005207) do
   add_index "collabs", ["project_id"], :name => "index_collabs_on_project_id"
   add_index "collabs", ["user_id"], :name => "index_collabs_on_user_id"
 
+  create_table "comments", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.string   "content",    :default => ""
+  end
+
+  add_index "comments", ["project_id", "created_at"], :name => "index_comments_on_project_id_and_created_at"
+
+  create_table "ideas", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "thought",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "ideas", ["user_id", "created_at"], :name => "index_ideas_on_user_id_and_created_at"
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "likes", ["project_id"], :name => "index_likes_on_project_id"
+  add_index "likes", ["user_id", "project_id"], :name => "index_likes_on_user_id_and_project_id", :unique => true
+  add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
+
   create_table "microposts", :force => true do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -44,9 +74,12 @@ ActiveRecord::Schema.define(:version => 20120412005207) do
     t.string   "description"
     t.boolean  "got"
     t.integer  "type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "title"
+    t.string   "reward",      :default => ""
+    t.string   "place",       :default => ""
+    t.boolean  "anywhere",    :default => true
   end
 
   add_index "needs", ["project_id", "created_at"], :name => "index_needs_on_project_id_and_created_at"

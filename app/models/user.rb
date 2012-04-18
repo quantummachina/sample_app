@@ -24,6 +24,11 @@ class User < ActiveRecord::Base
     has_many :collabs #, class_name: "Collab" #foreign_key: "user_id", dependent: :destroy
     has_many :collaborations, through: :collabs, source: :project #reverse?
 
+    has_many :ideas
+    has_many :comments
+    has_many :likes
+    has_many :liked_projects, through: :likes, source: :project
+
 	before_save :create_remember_token
 
 	validates :name,  presence: true, length: { maximum: 50 }

@@ -50,11 +50,14 @@
   </div>
   <div class="modal-body">
     <p><h3> Post an Idea! </h3></p>
-    <p> <%= text_area_tag :idea %> </p>
+    <%= form_for current_user.ideas.build(user_id: current_user.id) do |f|%>
+    <%= f.hidden_field :user_id %>
+    <%= f.text_field :thought %>
   </div>
   <div class="modal-footer">
     <a  data-dismiss="modal" href="#" class="btn">Close</a>
-    <a href="#" class="btn btn-info">Save</a>
-    <a href="#" class="btn btn-primary">Post!</a>
+    <%= f.submit "Save", class: "btn btn-info" %>
+    <% end %>
+    <a href="#" class="btn btn-primary">Publish!</a>
   </div>
 </div>
