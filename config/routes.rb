@@ -32,7 +32,12 @@ SampleApp::Application.routes.draw do
   resources :resources, only:[:create, :destroy]
   resources :needs
 
-  resources :ideas, only:[:create, :destroy, :post]
+  resources :ideas, only:[:create, :destroy, :publish] do
+    member do
+      get :publish
+    end
+  end
+  
   resources :likes, only:[:create, :destroy]
   resources :comments, only:[:create, :destroy]
 
@@ -55,6 +60,7 @@ SampleApp::Application.routes.draw do
   match '/upload_cover', to: 'projects#upload_cover'
   match '/nav', to: 'projects#nav'
   match '/sort', to: 'projects#sort'
+  match '/publish', to: 'ideas#publish'
 
   root to: 'static_pages#home' #'projects#index' 
   # The priority is based upon order of creation:

@@ -2,9 +2,9 @@ class IdeasController < ApplicationController
   before_filter :signed_in_user
 
   def create
-  	#<<current page>>`!!!
-    @user = User.find(params[:idea][:user_id])
-    @user.ideas.create!(thought: params[:idea][:thought])
+
+    @user = User.find(params[:user_id])
+    @user.ideas.create!(thought: params[:thought])
 
     respond_to do |format|
       format.html { redirect_to @user }
@@ -21,8 +21,28 @@ class IdeasController < ApplicationController
     end
   end
 
-  def post
-  	redirect_to root_path
+  def publish
+    #store_idea(params[:idea][:thought])
+    if params[:decition] == 'Save'
+      create
+    else
+
+      if params[:id]
+        convert(Idea.find(params[:id]))
+      else
+        convert(current_user.ideas.create!(thought: params[:thought]))
+      end
+
+    redirect_to edit_project_path(current_user.projects.first)
+    end
+
   end
+
+  private
+
+    def convert(idea)
+      idea.user.projects.create!(name: 'Idea', description: idea.thought)
+      idea.delete
+    end
 
 end

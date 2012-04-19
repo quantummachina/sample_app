@@ -45,7 +45,7 @@
               Thought <%= time_ago_in_words(c.created_at) %> ago.
             </span>
             <% if @user == current_user %>
-            <%= link_to "[Publish]", c, method: :publish %>
+            <%= link_to "[Publish]", publish_idea_path(c) %>
         <%= link_to "[x]", c, method: :delete,
                                          confirm: "Isn't a valuable idea anymore?",
                                          title: @user.name%>

@@ -42,6 +42,10 @@ module SessionsHelper
       session[:return_to] = request.fullpath
     end
 
+    def store_idea(thought)
+    	session[:idea] = thought
+    end
+
 	private
 
 		def user_from_remember_token
