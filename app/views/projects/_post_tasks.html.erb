@@ -5,7 +5,7 @@
 
  <%= f.text_field :description %>
  <%= f.select :responsible, options_from_collection_for_select(@project.collaborators, "id", "name")  %>
-  <%= f.calendar_date_select :deadline %>
+  <!--%= f.calendar_date_select :deadline %-->
 
 
   <%= f.submit "Post Task",class: "btn btn-large btn-secondary" %>

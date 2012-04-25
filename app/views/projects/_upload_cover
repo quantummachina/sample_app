@@ -1,6 +1,0 @@
-<div id="upload_cover">
-	<%= form_tag '/upload_cover', multipart: true, remote: true do %>
-      <label for="cover_file">Upload Photo Cover</label> <%= file_field_tag "cover_file",accept: 'image/png,image/gif,image/jpeg' %><!--%= f.file_field :cover_file, accept: 'image/png,image/gif,image/jpeg'  %-->
-      <%= submit_tag "Upload Photo" %>
-      <% end %>
-  </div>
