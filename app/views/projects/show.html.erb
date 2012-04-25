@@ -110,6 +110,23 @@
   <% end %>
 </br>
 
+
+
+    <% if @project.updates %>
+      <h3>Updates:</h3>
+      <% for update in @project.updates do %>
+        <ol>
+          <%= update.content %>  <% if @user.id == @project.user.id || @user.id == comment.user.id %>
+        <%= link_to "[x]", update, method: :delete,
+                                         title: @project.name%>
+                                         <% end %>
+        </ol>
+      <% end %>
+    <% end %>
+<% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+        <%= render 'post_update' %>
+      <% end %>
+
   <% if @project.finished %>
 
 
@@ -140,7 +157,7 @@
         <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
         <%= link_to "[x]", need, method: :delete,
                                          confirm: "This will remove current need, please confirm.",
-                                         title: @project.name%>
+                                         title: "delete" %>
                                          <% end %>
       </ol>
       <% end %>
@@ -150,6 +167,46 @@
     <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
         <%= render 'post_need' %>
       <% end %>
+
+  <h3>Tasks list:</h3>
+    <% if @project.tasks %>
+    
+      <% for task in @project.tasks do %>
+
+        <% if task.done == false %>
+        <ol>
+          <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[*]", controller: "tasks", action: "check", id: task.id , title: "mark done"%><% end %><%= task.description %> , <%= task.user.name %> <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", task, method: :delete, title: "delete"%><% end %>
+          </ol>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+        <%= render 'post_tasks' %>
+      <% end %>
+
+  <h3>Threads:</h3>
+  <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+    <%= render 'add_thread' %>
+  <% end %>
+
+    <% if @project.thrds %>
+    <ol>
+      <% for thrd in @project.thrds do %>
+          <h4><%= thrd.content%><% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", thrd, method: :delete, title: "delete"%><% end %></h4>
+
+          <% if thrd.commenthrds %>
+          <ol>
+            <% for comment in thrd.commenthrds do %>
+              <p><%= comment.comment %><% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", comment, method: :delete, title: "delete"%><% end %></p>
+            <% end %>
+          </ol>
+          <% end %>
+          <ol><%= render 'add_commenthrd', thrd: thrd %></ol>
+      <% end %>
+    </ol>
+    <% end %>
+
   <% end %>
   </div>
 

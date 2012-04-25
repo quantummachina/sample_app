@@ -19,15 +19,16 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
     has_many :followers, through: :reverse_relationships, source: :follower
-    has_many :projects #,dependent: :destroy
-
-    has_many :collabs #, class_name: "Collab" #foreign_key: "user_id", dependent: :destroy
+    has_many :projects, dependent: :destroy
+    has_many :collabs, dependent: :destroy
     has_many :collaborations, through: :collabs, source: :project #reverse?
-
-    has_many :ideas
+    has_many :ideas, dependent: :destroy
     has_many :comments
-    has_many :likes
+    has_many :likes, dependent: :destroy
     has_many :liked_projects, through: :likes, source: :project
+    has_many :thrds
+    has_many :commenthrds
+    has_many :responsibilities, foreign_key: :responsible
 
 	before_save :create_remember_token
 

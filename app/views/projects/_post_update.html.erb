@@ -1,0 +1,22 @@
+<a class="btn btn-warning" data-toggle="modal" href="#UpdateModal" >Post an Update</a>
+
+ <div class="modal hide fade" id="UpdateModal">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+    <h3>Update...</h3>
+  </div>
+  <div class="modal-body">
+    <p><h3> Post an Update</h3></p>
+    <%= form_for @project.updates.build(project_id: @project.id) do |f|%>
+    <%= f.hidden_field :project_id %>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+  <div class="modal-footer">
+
+    <a  data-dismiss="modal" href="#" class="btn">Close</a>
+    <%= f.submit "Post!", class: "btn btn-primary" %>
+    <% end %>
+
+  </div>
+</div>

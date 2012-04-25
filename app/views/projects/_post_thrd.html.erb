@@ -1,0 +1,9 @@
+<%= form_for @project.thrds.build(project_id: @project.id) do |f| %>
+
+<div><%= f.hidden_field :project_id %></div>
+<div><%= f.hidden_field :project_id %></div>
+
+ <%= f.text_area :content %>
+
+  <%= f.submit "Post Thread",class: "btn btn-large btn-secondary" %>
+<% end %>

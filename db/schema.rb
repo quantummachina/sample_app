@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419190137) do
+ActiveRecord::Schema.define(:version => 20120421182551) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(:version => 20120419190137) do
   add_index "collabs", ["project_id", "user_id"], :name => "index_collabs_on_project_id_and_user_id", :unique => true
   add_index "collabs", ["project_id"], :name => "index_collabs_on_project_id"
   add_index "collabs", ["user_id"], :name => "index_collabs_on_user_id"
+
+  create_table "commenthrds", :force => true do |t|
+    t.integer  "thrd_id"
+    t.integer  "user_id"
+    t.string   "comment",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "commenthrds", ["thrd_id"], :name => "index_commenthrds_on_thrd_id"
 
   create_table "comments", :force => true do |t|
     t.integer  "project_id"
@@ -142,6 +152,40 @@ ActiveRecord::Schema.define(:version => 20120419190137) do
   end
 
   add_index "tags", ["phrase"], :name => "index_tags_on_phrase", :unique => true
+
+  create_table "tasks", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "description", :default => ""
+    t.integer  "responsible"
+    t.date     "deadline"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "done",        :default => false
+  end
+
+  add_index "tasks", ["project_id"], :name => "index_tasks_on_project_id"
+
+  create_table "thrds", :force => true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.string   "title",      :default => ""
+    t.string   "content",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "thrds", ["project_id"], :name => "index_thrds_on_project_id"
+  add_index "thrds", ["user_id"], :name => "index_thrds_on_user_id"
+
+  create_table "updates", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "content",    :default => ""
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

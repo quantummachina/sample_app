@@ -31,6 +31,11 @@ SampleApp::Application.routes.draw do
   resources :collabs, only:[:create, :destroy]
   resources :resources, only:[:create, :destroy]
   resources :needs
+  resources :tasks, only:[:create, :destroy, :check] do
+    member do
+      get :check
+    end
+  end
 
   resources :ideas, only:[:create, :destroy, :publish] do
     member do
@@ -46,6 +51,9 @@ SampleApp::Application.routes.draw do
       get :collaborators, :resources
     end
   end
+  resources :thrds, only:[:create, :destroy]
+  resources :commenthrds, only:[:create, :destroy]
+  resources :updates, only:[:create, :destroy]
 
   match '/help',    to: 'static_pages#help'
   match '/about',   to: 'static_pages#about'

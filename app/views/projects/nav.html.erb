@@ -13,7 +13,7 @@
 		<%= check_box_tag :online, true, 'active' %> <%= label_tag 'Online'%> 
 		<%= check_box_tag :offline, true, 'active' %> <%= label_tag 'Offline'%>
 
-		<%= submit_tag "sort"%>
+		<%= submit_tag "show"%>
 		<% end %>
 	</section>
 
@@ -24,26 +24,7 @@
 <!--h1>All projects</h1-->
    <div class="span10">
 <!-- Desde aqui se debe hacer interactivo-->
-    <%= will_paginate %>
-
-    <ul class="thumbnails"> <!-- generar class projects-->
-	 <% @projects.each do |project| %>
-	   <li class ="span2">
-			<a href= <%= "projects/#{project.id}" %> class="thumbnail">
-				<!--div class="thumbnail"  %-->
-						<img  src= <%="projects_cover/#{project.cover}" %> 
-						alt= <%= project.name %> >
-						<h4><%= wrap(project.name[0..24]) %></h4>
-						<h5><%= wrap(project.description[0..40]) %></h5>
-						<span class="timestamp">
-							Posted <%= time_ago_in_words(project.created_at) %> ago.
-						</span>
-				</a>
-		</li>
-
-	 <% end %>
-    </ul>
-    <%= will_paginate %>
+	<%= render 'projects' %>
    </div>
   </div>
  </div>

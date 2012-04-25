@@ -1,0 +1,6 @@
+<%= form_for thrd.commenthrds.build(thrd_id: thrd.id) do |f| %>
+
+<div><%= f.hidden_field :thrd_id %></div>
+
+ <p><%= f.text_field :comment %><%= f.submit "Commment",class: "btn btn-small btn-secondary" %></p>
+<% end %>
