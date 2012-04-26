@@ -116,7 +116,7 @@
       <h3>Updates:</h3>
       <% for update in @project.updates do %>
         <ol>
-          <%= update.content %>  <% if @user.id == @project.user.id || @user.id == update.user.id %>
+          <%= update.content %>  <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
         <%= link_to "[x]", update, method: :delete,
                                          title: @project.name%>
                                          <% end %>
