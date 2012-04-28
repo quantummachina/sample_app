@@ -1,0 +1,7 @@
+<% for task in @project.tasks do %>
+    <% if task.done == false %>
+      <ol>
+      <% if collaborator?(@project) %><%= link_to "[*]", controller: "tasks", action: "check", id: task.id , title: "mark done"%><% end %><%= task.description %> , <%= task.user.name %> <% if collaborator?(@project) %><%= render 'shared/rem', obj: task %><% end %>
+      </ol>
+    <% end %>
+<% end %>

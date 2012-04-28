@@ -1,0 +1,15 @@
+<% for t in @project.thrds do %>
+  <% if t.id %>
+    <ol>
+      <h4><%= t.content%><% if collaborator?(@project) %><%= render 'shared/rem', obj: t %><% end %></h4>
+      <% if t.commenthrds %>
+        <ol>
+        <% for comment in t.commenthrds do %>
+          <p><%= comment.comment %><% if collaborator?(@project) %><%= render 'shared/rem', obj: comment%><% end %></p>
+        <% end %>
+        </ol>
+      <% end %>
+      <ol><%= render 'add_commenthrd', thrd: t %></ol>
+    </ol>
+  <% end %>
+<% end %>

@@ -1,0 +1,60 @@
+<h1>
+  <%= @project.name %>
+</h1>
+
+<h4><%= pluralize(@project.likes_count, "like") %></h4>
+
+<ul class="thumbnails">
+  <li class="span6">
+    <a href="#" class="thumbnail">
+      <img  src= <%="/projects_cover/#{@project.cover}" %> alt="">
+    </a>
+  </li>
+</ul>
+<h4>
+  Category: <span class="label label-info"><%= link_to @project.category.name, nav_path(category: @project.category)  %></span>
+</h4>
+  </br>
+<h2>
+  <%= @project.description %>
+</h2>
+
+<% if @project.collaborators %>
+<h3> Collaborators: </h3>
+  <% @project.collaborators.each do |c| %>
+   <span class="label"> <%= link_to c.name, c %> </span>
+   <% end %>
+ </h3>
+<% end %>
+   
+
+<h3>
+  This is a <%=profit?(@project.profitable)%> project 
+</h3>
+<h3>
+  This is an <%=online?(@project.online)%> project 
+</h3>
+<h3>
+  <% if @project.place != "" %>
+  <%= "This project currently running at " + @project.place %>
+  <% end %>
+</h3>
+<h3>
+  This is a <%=finished?(@project.finished)%> project 
+</h3>
+</br>
+<h4>
+  Tags: 
+  <% tag_split(@project.tags).each do |t| %>
+      <span class="label"><%= t %></span>
+  <% end %>
+</h4>
+</br>
+
+  <% if current_user?(@project.user) %>
+      <%= link_to "delete", @project, method: :delete,
+                                       confirm: "No please! we won't survive without it :'(",
+                                       title: @project.name %>
+      <%= link_to "edit", edit_project_path(@project) %>
+  <% end %>
+</br>

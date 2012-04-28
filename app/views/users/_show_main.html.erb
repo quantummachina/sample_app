@@ -1,0 +1,13 @@
+<section>
+  <h1>
+    <%= gravatar_for @user %>
+    <%= @user.name %>
+  </h1>
+</section>
+<section>
+  <h4>
+    From <%= @user.place %> </br></br>
+    Ocupation: <%= @user.whatido %> </br></br>
+    Stalk me at: <%= link_to @user.webpage, "http://"+@user.webpage %>
+  </h4>
+</section>

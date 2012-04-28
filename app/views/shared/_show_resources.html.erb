@@ -1,0 +1,8 @@
+<!-- Require resources -->
+<% for resource in resources do %>
+  <ol><%= resource.content_html %>
+    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+      <%= render 'shared/rem', obj: resource %>
+    <% end %>
+  </ol>
+<% end %>

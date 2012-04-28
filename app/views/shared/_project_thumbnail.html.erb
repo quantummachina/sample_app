@@ -1,0 +1,16 @@
+<!-- expects project collecion and size (maybe in the future)-->
+<ul class="thumbnails"> 
+  <% projects.each do |project| %>
+    <li class = <%="span#{size}" %> >
+      <a href= <%= "/projects/#{project.id}" %> class="thumbnail">
+            <img  src= <%="/projects_cover/#{project.cover}" %> 
+            alt= <%= project.name %> >
+            <h4><%= wrap(project.name[0..24]) %></h4>
+            <h5><%= wrap(project.description[0..40]) %></h5>
+            <span class="timestamp">
+              Posted <%= time_ago_in_words(project.created_at) %> ago.
+            </span>
+        </a>
+    </li>
+  <% end %>
+</ul>

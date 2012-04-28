@@ -1,0 +1,13 @@
+<% for need in @project.needs do %>
+  <ol>
+    <h4><%= need.title %>, @ <%= if need.anywhere ; "Anywhere" else need.place end %></h4>
+    <p><%= need.description %></p>
+    <p> REWARD: <%= need.reward %></p>
+    <% if collaborator?(@project) %>
+      <%= render 'shared/rem', obj: need %>
+      <!--%= link_to "[x]", need, method: :delete,
+                                     confirm: "This will remove current need, please confirm.",
+                                     title: "delete" %-->
+    <% end %>
+  </ol>
+<% end %>
