@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-	attr_accessible :name, :description, :cover, :profitable, :category_id , :tags, :online, :place, :finished
+	attr_accessible :name, :description, :cover, :profitable, :category_id , :tags, :online, :place, :finished, :likes_count
 
 	belongs_to :user
 	belongs_to :category
@@ -25,5 +25,12 @@ class Project < ActiveRecord::Base
 		else
 			find(:all)
 		end
+	end
+
+#Iniciativa para turnaround del contador. Eliminar si el cache funciona adecuadamente:
+	def inclike
+		c = likes_count
+		c = c + 1
+		update_attributes(likes_count: c)
 	end
 end

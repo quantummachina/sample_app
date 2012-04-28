@@ -6,12 +6,6 @@ class ProjectsController < ApplicationController
 
   def show
   	@project = Project.find(params[:id])
-    #@needs = @project.needs
-    #@need = @project.needs.new
-  end
-
-  def index
-  	@projects = Project.paginate(page: params[:page])
   end
 
   def new
@@ -23,7 +17,6 @@ class ProjectsController < ApplicationController
   def create
     #independiente de la subida de archivo
     @project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category], online: params[:project][:online], finished: params[:project][:finished], place: params[:project][:place]) #Reemplazar pamas project, por la forma completa desglosada
-    #@project.cover = @filename
 
     if @project.save
       flash[:success] = "Your project has been created!"
@@ -59,32 +52,58 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+  def index
+    cat_indx = params[:category] || ""
+    @categories = Category.all #TODAS
+
+    if cat_indx == ""
+    
+    @ptop = Project.reorder('likes_count DESC').paginate(page: params[:ptop], per_page: 2)
+    @pnew = Project.paginate(page: params[:pnew], per_page: 5)
+    @prand = Project.reorder('RANDOM()').paginate(page: params[:prand], per_page: 10)
+    else #UNA CATEGORIA
+      #@projects = Category.find(cat_indx).projects.paginate(page: params[:p_algo])
+
+    @ptop = Category.find(cat_indx).projects.reorder('likes_count DESC').paginate(page: params[:ptop], per_page: 2)
+    @pnew = Category.find(cat_indx).projects.paginate(page: params[:pnew], per_page: 5)
+    @prand = Category.find(cat_indx).projects.reorder('RANDOM()').paginate(page: params[:prand], per_page: 10)
+
+    end
+
+      @cat_indx=cat_indx
+    
+
+  end
+
+
   def nav #WORK TO DO! Ref> Behance
     cat_indx = params[:category] || ""
     onln = params[:online] || true
     offln = params[:offline] || true
     @categories = Category.all #TODAS
 
+
     if params[:search]
       @projects = Project.search_pro(params[:search])
     else
 
     
-     if cat_indx == ""
+    if cat_indx == ""
       @projects = Project.paginate(page: params[:page])
-     else #UNA CATEGORIA
+    else #UNA CATEGORIA
       @projects = Category.find(cat_indx).projects.paginate(page: params[:page])
-      end
+    end
       @cat_indx=cat_indx
 
-     if onln
+    if onln
       @p1 = @projects.find_all_by_online(true)
-      end
-      if offln
-      @p2 = @projects.find_all_by_online(false)
-       end
-
     end
+    if offln
+      @p2 = @projects.find_all_by_online(false)
+    end
+
+  end
 
   end
 

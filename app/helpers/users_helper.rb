@@ -7,5 +7,12 @@ module UsersHelper
     gravatar_url = "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
-	
+
+  def collaborator?(project)
+	  current_user.id == project.user.id || project.collaborators.exists?(current_user)
+  end
+
+  def owner?(obj)
+    current_user.id == @project.user.id || current_user.id == obj.user.id
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120421182551) do
+ActiveRecord::Schema.define(:version => 20120427200929) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20120421182551) do
     t.boolean  "online",      :default => true
     t.string   "place",       :default => ""
     t.boolean  "finished",    :default => false
+    t.integer  "likes_count", :default => 0
   end
 
   add_index "projects", ["category_id"], :name => "index_projects_on_category"

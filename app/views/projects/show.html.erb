@@ -5,176 +5,58 @@
   <aside class="span3">
     <section>
       <h1>
-        <%= gravatar_for User.find(@project.user_id) %> <!-- cambiar al user presente o ejecutar un mejor m[etodo. Ojo con los stats-->
+        <%= gravatar_for User.find(@project.user_id) %> 
         <%= link_to User.find(@project.user_id).name, User.find(@project.user_id) %>
       </h1>
     </section>
     <section>
       <%= render 'shared/stats' %>
     </section>
-  <section>
-
-    <h3>Owned Projects (<%= User.find(@project.user_id).projects.count %>)</h3>
-   </br>
-
-    <ul class="thumbnails"> <!-- generar class projects-->
-   <% User.find(@project.user_id).projects.each do |project| %>
-     <li class ="span3">
-      <a href= <%= "/projects/#{project.id}" %> class="thumbnail">
-        <!--div class="thumbnail"  %-->
-            <img  src= <%="/projects_cover/#{project.cover}" %> 
-            alt= <%= project.name %> >
-            <h4><%= wrap(project.name[0..24]) %></h4>
-            <h5><%= wrap(project.description[0..40]) %></h5>
-            <span class="timestamp">
-              Posted <%= time_ago_in_words(project.created_at) %> ago.
-            </span>
-        </a>
-    </li>
-
-   <% end %>
-    </ul>
- 
-  </section>
-
+    <section>
+      <h3>Owned Projects (<%= User.find(@project.user_id).projects.count %>)</h3>
+      </br>
+      <%= render 'shared/project_thumbnail', projects: User.find(@project.user_id).projects, size: "3" %>
+    </section>
   </aside>
 
 <!-- CUERPO -->
 
   <div class="span6">
-<table>
-  <td>
-<% if @project.finished != true %>
-  <%= render 'collab_form' %>
-<% end %>
-</td>
-<td><%= render 'like_form' %></td>
-</table>
-
-<h1>
-  <%= @project.name %>
-</h1>
-
-<ul class="thumbnails">
-  <li class="span6">
-    <a href="#" class="thumbnail">
-      <img  src= <%="/projects_cover/#{@project.cover}" %> alt="">
-    </a>
-  </li>
-</ul>
-<h4>
-  Category: <span class="label label-info"><%= link_to @project.category.name, nav_path(category: @project.category)  %></span>
-</h4>
-  </br>
-<h2>
-  <%= @project.description %>
-</h2>
-
-<% if @project.collaborators %>
-<h3> Collaborators: </h3>
-  <% @project.collaborators.each do |c| %>
-   <span class="label"> <%= link_to c.name, c %> </span>
-   <% end %>
- </h3>
-<% end %>
-   
-
-<h3>
-  This is a <%=profit?(@project.profitable)%> project 
-</h3>
-<h3>
-  This is an <%=online?(@project.online)%> project 
-</h3>
-<h3>
-  <% if @project.place != "" %>
-  <%= "This project currently running at " + @project.place %>
-  <% end %>
-</h3>
-<h3>
-  This is a <%=finished?(@project.finished)%> project 
-</h3>
-</br>
-<h4>
-  Tags: 
-  <% tag_split(@project.tags).each do |t| %>
-      <span class="label"><%= t %></span>
-  <% end %>
-</h4>
-</br>
-
-  <% if current_user?(@project.user) %>
-      <%= link_to "delete", @project, method: :delete,
-                                       confirm: "No please! we won't survive without it :'(",
-                                       title: @project.name %>
-      <%= link_to "edit", edit_project_path(@project) %>
-  <% end %>
-</br>
-
-
+    <table>
+      <td>
+        <% if @project.finished != true %>
+          <%= render 'collab_form' %>
+        <% end %>
+      </td>
+      <td><%= render 'like_form' %></td>
+    </table>
+    <%= render 'show_main' %> <!-- main info -->
 
     <% if @project.updates %>
-      <h3>Updates:</h3>
-      <% for update in @project.updates do %>
-        <ol>
-          <%= update.content %>  <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-        <%= link_to "[x]", update, method: :delete,
-                                         title: @project.name%>
-                                         <% end %>
-        </ol>
-      <% end %>
+      <%= render 'show_updates' %>
     <% end %>
-    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+    <% if collaborator?(@project) %>
       <%= render 'post_update' %>
     <% end %>
 
     <% if @project.finished %>
-      <h3>Comments:</h3>
-      <% if @project.comments %>
-        <% for comment in @project.comments do %>
-          <ol>
-            <h4><%= link_to comment.user.name, comment.user %>, said:
-            <p><%= comment.content %></p>
-            <% if @user.id == @project.user.id || @user.id == comment.user.id %>
-            <%= link_to "[x]", comment, method: :delete,
-                                         title: "remove"%>
-                                         <% end %>
-          </ol>
-        <% end %>
-      <% end %>
+      <%= render 'show_comments' %>
       <%= render 'post_comment' %>
-
-    <% else %><!-- contenido si no est[a cerrado]-->
+    <% else %>
 
     <h3>Needs:</h3>
     <% if @project.needs %>
-      <% for need in @project.needs do %>
-        <ol>
-          <h4><%= need.title %>, @ <%= if need.anywhere ; "Anywhere" else need.place end %></h4>
-          <p><%= need.description %></p>
-          <p> REWARD: <%= need.reward %></p>
-          <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-          <%= link_to "[x]", need, method: :delete,
-                                           confirm: "This will remove current need, please confirm.",
-                                           title: "delete" %>
-          <% end %>
-        </ol>
-      <% end %>
+      <%= render 'show_needs' %>
     <% end %>
-    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+    <% if collaborator?(@project) %>
         <%= render 'post_need' %>
     <% end %>
 
     <h3>Tasks list:</h3>
     <% if @project.tasks %>
-      <% for task in @project.tasks do %>
-        <% if task.done == false %>
-          <ol>
-          <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[*]", controller: "tasks", action: "check", id: task.id , title: "mark done"%><% end %><%= task.description %> , <%= task.user.name %> <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", task, method: :delete, title: "delete"%><% end %>
-          </ol>
-        <% end %>
-      <% end %>
+      <%= render 'show_tasks' %>
     <% end %>
-    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
+    <% if collaborator?(@project) %>
         <%= render 'post_tasks' %>
     <% end %>
 
@@ -184,21 +66,7 @@
     <% end %>
 
     <% if @project.thrds %>
-      <% for t in @project.thrds do %>
-        <% if t.id %>
-        <ol>
-          <h4><%= t.content%><% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", t, method: :delete, title: "delete"%><% end %></h4>
-          <% if t.commenthrds %>
-            <ol>
-            <% for comment in t.commenthrds do %>
-              <p><%= comment.comment %><% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %><%= link_to "[x]", comment, method: :delete, title: "delete"%><% end %></p>
-            <% end %>
-            </ol>
-          <% end %>
-          <ol><%= render 'add_commenthrd', thrd: t %></ol>
-        </ol>
-        <% end %>
-      <% end %>
+      <%= render 'show_thrds' %>
     <% end %>
 
   <% end %>
@@ -209,21 +77,12 @@
   <div class="span3">
     <h3>Resources</h3>
     <% if @project.resources %>
-      <% for resource in @project.resources do %>
-        <ol><%= resource.content_html %>
-        <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-          <!--%= render 'del_resource'%-->
-          <%= link_to "[x]", @project.resources.find(resource.id), method: :delete,
-                                       confirm: "This will remove current resource, please confirm.",
-                                       title: @project.name%>
-        <% end %>
-        </ol>
-      <% end %>
+      <%= render 'shared/show_resources', resources: @project.resources %>
     <% end %>
-  </br>
-  <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-    <%= render 'add_resource' %>
-  <% end %>
+    </br>
+    <% if collaborator?(@project) %>
+      <%= render 'add_resource' %>
+   <% end %>
   </div>
-    
-  </div>
+  
+</div>

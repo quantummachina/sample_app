@@ -1,135 +1,48 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="span4">
-    <section>
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %>
-      </h1>
-    </section>
-    <section>
-      <h4>
-        From <%= @user.place %> </br></br>
-        Ocupation: <%= @user.whatido %> </br></br>
-        Stalk me at: <%= link_to @user.webpage, "http://"+@user.webpage %>
-      </h4>
-    </section>
+    <%= render 'show_main' %>
     <section>
       <%= render 'shared/stats' %>
     </section>
     <section>
-
       <%= render 'follow_form' if signed_in? %>
-    <% if @user.microposts.any? %>
-    <h3>Microposts (<%= @user.microposts.count %>)</h3>
+      <% if @user.microposts.any? %>
+        <h3>Microposts (<%= @user.microposts.count %>)</h3>
         <ol class="microposts">
           <%= render @microposts %>
         </ol>
         <%= will_paginate @microposts, param_name: :microposts_page %>
       <% end %>
-
     </section>
   </aside>
 
+<!-- BODY -->
   <div class="span8">
-
-<% if @user.ideas %>
-  </br>
-  <h3>Ideas! (<%= @user.ideas.count %>)</h3>
-   </br>
-   <ul class="thumbnails">
-  <% @user.ideas.each do |c| %>
-    <li class ="span4">
-      <h4> <%= c.thought %> </h4>
-      <span class="timestamp">
-              Thought <%= time_ago_in_words(c.created_at) %> ago.
-            </span>
-            <% if @user == current_user %>
-            <%= link_to "[Publish]", publish_idea_path(c) %>
-        <%= link_to "[x]", c, method: :delete,
-                                         confirm: "Isn't a valuable idea anymore?",
-                                         title: @user.name%>
-                                         <% end %>
-    </li>
+    </br>
+    <h3>Ideas! (<%= @user.ideas.count %>)</h3>
+    </br>
+    <% if @user.ideas %>
+      <%= render 'show_ideas' %>
     <% end %>
-  </ul>
-  <% end %>
+    </br>
+    <h3>Liked Projects (<%= @user.liked_projects.count %>)</h3>
+    </br>
+    <% if @user.likes %>
+      <%= render 'shared/project_thumbnail', projects: @user.liked_projects, size: 2 %>
+    <% end %>
 
-<% if @user.likes %>
-  </br>
-  <h3>Liked Projects (<%= @user.liked_projects.count %>)</h3>
-   </br>
- <ul class="thumbnails">
-<% @user.liked_projects.each do |c| %>
-     <li class ="span2">
-      <a href= <%= "/projects/#{c.id}" %> class="thumbnail">
-        <!--div class="thumbnail"  %-->
-            <img  src= <%="/projects_cover/#{c.cover}" %> 
-            alt= <%= c.name %> >
-            <h4><%= wrap(c.name[0..24]) %></h4>
-            <h5><%= wrap(c.description[0..40]) %></h5>
-            <span class="timestamp">
-              Posted <%= time_ago_in_words(c.created_at) %> ago.
-            </span>
-        </a>
-    </li>
-     <% end %>
-    </ul>
-<% end %>
-
-
-     <h3>Owned Projects (<%= @user.projects.count %>)</h3>
-   </br>
-
-    <ul class="thumbnails"> <!-- generar class projects-->
-   <% @projects.each do |project| %>
-     <li class ="span2">
-      <a href= <%= "/projects/#{project.id}" %> class="thumbnail">
-        <!--div class="thumbnail"  %-->
-            <img  src= <%="/projects_cover/#{project.cover}" %> 
-            alt= <%= project.name %> >
-            <h4><%= wrap(project.name[0..24]) %></h4>
-            <h5><%= wrap(project.description[0..40]) %></h5>
-            <span class="timestamp">
-              Posted <%= time_ago_in_words(project.created_at) %> ago.
-            </span>
-        </a>
-    </li>
-
-   <% end %>
-    </ul>
+    <h3>Owned Projects (<%= @user.projects.count %>)</h3>
+    </br>
+    <%= render 'shared/project_thumbnail', projects: @projects, size: 2 %> 
     <%= will_paginate @projects, param_name: :projects_page%>
+    </br>
 
-<% if @user.collaborations %>
-  </br>
-  <h3>Collaborations (<%= @user.collaborations.count %>)</h3>
-   </br>
- <ul class="thumbnails">
-<% @user.collaborations.each do |c| %>
-     <li class ="span2">
-      <a href= <%= "/projects/#{c.id}" %> class="thumbnail">
-        <!--div class="thumbnail"  %-->
-            <img  src= <%="/projects_cover/#{c.cover}" %> 
-            alt= <%= c.name %> >
-            <h4><%= wrap(c.name[0..24]) %></h4>
-            <h5><%= wrap(c.description[0..40]) %></h5>
-            <span class="timestamp">
-              Posted <%= time_ago_in_words(c.created_at) %> ago.
-            </span>
-        </a>
-    </li>
-     <% end %>
-    </ul>
-<% end %>
+    <h3>Collaborations (<%= @user.collaborations.count %>)</h3>
+    </br>
+    <% if @user.collaborations %>
+      <%= render 'shared/project_thumbnail', projects: @user.collaborations, size: 2 %>
+    <% end %>
   </div>
     
-  </div>
-
-
-    <!--
-<table class="profile">
-  <tr>
-    <td class="main">
-    </td>
-  </tr>
-</table>-->
+</div>
