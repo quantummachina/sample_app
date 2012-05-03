@@ -9,6 +9,9 @@ gem 'bootstrap-will_paginate', '0.0.5'
 gem "remotipart", "~> 1.0"
 gem "auto_html"
 gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select.git'
+gem 'paperclip'
+gem 'aws-s3'
+gem 'aws-sdk'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

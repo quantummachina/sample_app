@@ -4,13 +4,7 @@
 
 <h4><%= pluralize(@project.likes_count, "like") %></h4>
 
-<ul class="thumbnails">
-  <li class="span6">
-    <a href="#" class="thumbnail">
-      <img  src= <%="/projects_cover/#{@project.cover}" %> alt="">
-    </a>
-  </li>
-</ul>
+<%= render 'thumbnail' %>
 <h4>
   Category: <span class="label label-info"><%= link_to @project.category.name, nav_path(category: @project.category)  %></span>
 </h4>

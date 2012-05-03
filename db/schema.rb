@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427200929) do
+ActiveRecord::Schema.define(:version => 20120502202340) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -98,16 +98,20 @@ ActiveRecord::Schema.define(:version => 20120427200929) do
     t.string   "name"
     t.integer  "user_id"
     t.string   "description"
-    t.string   "cover",       :default => ""
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.boolean  "profitable",  :default => false
-    t.integer  "category_id", :default => 1
-    t.string   "tags",        :default => ""
-    t.boolean  "online",      :default => true
-    t.string   "place",       :default => ""
-    t.boolean  "finished",    :default => false
-    t.integer  "likes_count", :default => 0
+    t.string   "cover",              :default => ""
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.boolean  "profitable",         :default => false
+    t.integer  "category_id",        :default => 1
+    t.string   "tags",               :default => ""
+    t.boolean  "online",             :default => true
+    t.string   "place",              :default => ""
+    t.boolean  "finished",           :default => false
+    t.integer  "likes_count",        :default => 0
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "projects", ["category_id"], :name => "index_projects_on_category"

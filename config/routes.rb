@@ -66,6 +66,7 @@ SampleApp::Application.routes.draw do
   #match '/user_projects', to: 'static_pages#show_projects'
   match '/start_project', to: 'projects#new'
   match '/upload_cover', to: 'projects#upload_cover'
+  match '/delete_cover', to: 'projects#delete_cover'
   match '/nav', to: 'projects#index'
   match '/sort', to: 'projects#sort'
   match '/publish', to: 'ideas#publish'
