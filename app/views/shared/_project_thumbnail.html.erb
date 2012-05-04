@@ -4,7 +4,6 @@
     <li class = <%="span#{size}" %> >
       <a href= <%= "/projects/#{project.id}" %> class="thumbnail">
             <%= image_tag project.cover.url %> 
-            alt= <%= project.name %> >
             <h4><%= wrap(project.name[0..24]) %></h4>
             <h5><%= wrap(project.description[0..40]) %></h5>
             <span class="timestamp">

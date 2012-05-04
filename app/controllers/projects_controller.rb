@@ -15,11 +15,11 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    #independiente de la subida de archivo
-    #@project = current_user.projects.build(name: params[:project][:name], description: params[:project][:description], cover: @filename, profitable: params[:project][:profitable], tags: params[:project][:tags], category_id: params[:project][:category], online: params[:project][:online], finished: params[:project][:finished], place: params[:project][:place]) #Reemplazar pamas project, por la forma completa desglosada
+
     @project = current_user.projects.build( params[:project] )
 
     if @project.save
+      
       flash[:success] = "Your project has been created!"
       redirect_to @project
 
@@ -70,33 +70,9 @@ class ProjectsController < ApplicationController
     end
 
       @cat_indx=cat_indx
-    
-
+  
   end
 
-
-
-  #Idea para integrar el file uploaded con un [unico bot[on]]
-#@user = User.new(params[:user])
-#is equivalent to
-#@user = User.new(name: "Foo Bar", email: "foo@invalid",
-                 #password: "foo", password_confirmation: "bar")
-
-  def upload_cover
-    tmp = params[:cover_file].tempfile
-    filename = params[:cover_file].original_filename
-    directory = "public/projects_cover/"
-    path = File.join(directory, filename)
-    File.open(path, "wb").write(params[:cover_file].read)
-    #@project.cover = filename
-    #redireccionar o parcial.
-    @filename = filename
-
-    respond_to do |format|
-      format.html { redirect_to '/start_project' } #funciona sin ajax
-      format.js
-    end
-  end
 
   def delete_cover
     @project = params[:project]
