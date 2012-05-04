@@ -4,6 +4,14 @@ GIT
   specs:
     calendar_date_select (1.16.2)
 
+GIT
+  remote: git://github.com/quantummachina/auto_html.git
+  revision: c9a4c7a71e56a2cf824a230baf4f1b262707b516
+  specs:
+    auto_html (1.5.1)
+      redcarpet (~> 2.0.0)
+      rinku (~> 1.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -37,9 +45,6 @@ GEM
     annotate (2.4.1.beta1)
     archive-tar-minitar (0.5.2)
     arel (3.0.2)
-    auto_html (1.5.1)
-      redcarpet (~> 2.0.0)
-      rinku (~> 1.5.0)
     aws-s3 (0.6.2)
       builder
       mime-types
@@ -235,7 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.4.1.beta)
-  auto_html
+  auto_html!
   aws-s3
   aws-sdk
   bcrypt-ruby (= 3.0.1)
@@ -250,6 +255,7 @@ DEPENDENCIES
   faker (= 1.0.1)
   guard-rspec (= 0.5.5)
   guard-spork (= 0.3.2)
+  httparty
   jquery-rails (= 1.0.19)
   paperclip
   pg (= 0.12.2)
