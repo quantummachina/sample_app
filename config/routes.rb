@@ -30,6 +30,7 @@ SampleApp::Application.routes.draw do
   resources :relationships, only:[:create, :destroy]
   resources :collabs, only:[:create, :destroy]
   resources :resources, only:[:create, :destroy]
+  resources :inspirations, only:[:create, :destroy, :index]
   resources :needs
   resources :tasks, only:[:create, :destroy, :check] do
     member do
@@ -70,6 +71,7 @@ SampleApp::Application.routes.draw do
   match '/nav', to: 'projects#index'
   match '/sort', to: 'projects#sort'
   match '/publish', to: 'ideas#publish'
+  match '/board', to: 'inspirations#index'
 
   root to: 'static_pages#home' #'projects#index' 
   # The priority is based upon order of creation:

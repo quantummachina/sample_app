@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
     has_many :thrds
     has_many :commenthrds
     has_many :responsibilities, foreign_key: :responsible
+    has_many :inspirations
 
 	before_save :create_remember_token
 

@@ -1,0 +1,10 @@
+<!-- Require inspirations and size -->
+<ul>
+	<% for inspiration in inspirations do %>
+	  <% if inspiration.id %>
+  	    <li class = <%="span#{size}" %> ><%= inspiration.content_html %>
+          <%= render 'shared/rem', obj: inspiration %>
+  	    </li>
+  	  <% end %>
+	<% end %>
+</ul>

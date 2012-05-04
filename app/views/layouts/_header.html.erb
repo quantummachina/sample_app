@@ -33,7 +33,7 @@
             </li>
 
             <li><a class="btn btn-warning" data-toggle="modal" href="#IdeaModal" >Idea!</a> </li>
-
+            <li><a class="btn btn-warning" data-toggle="modal" href="#BoardModal" >Board</a> </li>
             
 
           <% else %>
@@ -46,25 +46,39 @@
 </header>
 
 <% if signed_in? %>
-<div class="modal hide fade" id="IdeaModal">
+  <div class="modal hide fade" id="IdeaModal">
 
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">×</a>
-                <h3>I just came up with...</h3>
-              </div>
-              <div class="modal-body">
-                <p><h3> Post an Idea! </h3></p>
-                <%= form_tag '/publish' do %>
-                <%= hidden_field_tag :user_id, current_user.id %>
-                <%= text_field_tag :thought %>
-              </div>
-              <div class="modal-footer">
-                <a  data-dismiss="modal" href="#" class="btn">Close</a>
-                <%= submit_tag "Save", name: 'decition', class: "btn btn-info" %>
-                
-                  <%= submit_tag 'Publish', name: 'decition', class: "btn btn-primary"%>
-                <% end %>
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>I just came up with...</h3>
+    </div>
+    <div class="modal-body">
+      <p><h3> Post an Idea! </h3></p>
+      <%= form_tag '/publish' do %>
+      <%= hidden_field_tag :user_id, current_user.id %>
+      <%= text_field_tag :thought %>
+    </div>
+    <div class="modal-footer">
+      <a  data-dismiss="modal" href="#" class="btn">Close</a>
+      <%= submit_tag "Save", name: 'decition', class: "btn btn-info" %>
+      
+        <%= submit_tag 'Publish', name: 'decition', class: "btn btn-primary"%>
+      <% end %>
 
-              </div>
-            </div>
+    </div>
+  </div>
+
+  <div class="modal hide fade" id="BoardModal">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>My inspiration</h3>
+    </div>
+    <div class="modal-body">
+      <p><h3> My inspiration </h3></p>
+      <%= render 'shared/board' %>
+    </div>
+    <div class="modal-footer">
+    </div>
+  </div>
 <% end %>

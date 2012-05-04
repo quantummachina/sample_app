@@ -1,0 +1,4 @@
+<%= render 'add_inspiration' %>
+<% if current_user.inspirations %>
+	<%= render 'show_inspirations', inspirations: current_user.inspirations, size: "2" %>
+<% end %>

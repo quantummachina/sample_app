@@ -1,0 +1,4 @@
+<%= form_for current_user.inspirations.build do |f| %>
+<%= f.text_field :content %>
+<%= f.submit "Add Inspiration", class: "btn btn-small" %>
+<% end %>
