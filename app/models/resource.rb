@@ -6,9 +6,9 @@ class Resource < ActiveRecord::Base
   auto_html_for :content do
   	html_escape
   	image
-  	vimeo(width: 200, height: 125)
-  	youtube(width: 200, height: 125)
-  	google_map(width: 180, height: 135)
+  	vimeo(width: 190, height: 125)
+  	youtube(width: 190, height: 125)
+  	google_map(width: 190, height: 135)
   	link target: "_blank", rel: "nofollow"
   	simple_format
   end
