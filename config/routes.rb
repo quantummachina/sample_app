@@ -1,5 +1,9 @@
 SampleApp::Application.routes.draw do
 
+  resources :lines, only:[:create, :index]
+
+  resources :conversations, only:[:create, :index, :show]
+
   get "likes/create"
 
   get "likes/destroy"

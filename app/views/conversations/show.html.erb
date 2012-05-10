@@ -1,0 +1,12 @@
+<h1><%= "With: " + @conversation.interlocutor.name %></h3>
+	<%= render "new_line" %>
+	<ul>
+		<% for line in @conversation.lines do %>
+			<% if line.id %>
+				<li>
+					<%=line.user.name%>: <%=line.text %>
+				</li>
+			<% end %>
+		<% end %>
+	</ul>
+</ul>

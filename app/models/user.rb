@@ -31,7 +31,10 @@ class User < ActiveRecord::Base
     has_many :commenthrds
     has_many :responsibilities, foreign_key: :responsible
     has_many :inspirations
-
+    has_many :conversations
+    has_many :reverse_conversations, foreign_key: "interlocutor_id", class_name: "Conversation"
+    has_many :interlocutors, through: :reverse_conversations, source: :interlocutor
+#FIX DEPENDENT DESTROYS
 	before_save :create_remember_token
 
 	validates :name,  presence: true, length: { maximum: 50 }

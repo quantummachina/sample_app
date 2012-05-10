@@ -8,7 +8,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.5'
 gem "remotipart", "~> 1.0"
 gem "auto_html", git: 'git://github.com/quantummachina/auto_html.git'
-gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select.git'
+gem 'calendar_date_select' #, :git => 'git://github.com/paneq/calendar_date_select.git'
 gem 'paperclip'
 gem 'aws-s3'
 gem 'aws-sdk'

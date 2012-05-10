@@ -1,0 +1,8 @@
+<% unless current_user?(@user) %>
+  <div>
+	<%= form_for current_user.conversations.build(interlocutor_id: @user.id) do |f| %>
+	  <div><%= f.hidden_field :interlocutor_id %></div>
+	  <%= f.submit "Message", class: "btn btn-large btn-primary" %>
+	<% end %>
+  </div>
+<% end %>

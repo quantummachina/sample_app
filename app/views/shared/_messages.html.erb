@@ -1,0 +1,15 @@
+<!--to be deleted if not used-->
+<ul>
+	<% for conversation in current_user.conversations do %>
+		<li>
+			With: <%= conversation.interlocutor.name %>
+			<ul>
+				<% for line in conversation.lines do %>
+					<li>
+						<%=line.user.name%>: <%=line.text %>
+					</li>
+				<% end %>
+			</ul>
+		</li>
+	<% end %>
+</ul>
