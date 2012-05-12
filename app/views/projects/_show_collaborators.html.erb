@@ -1,0 +1,7 @@
+<% if @project.collaborators %>
+<h3> Creative Team: </h3>
+  <% @project.collaborators.each do |c| %>
+   <span class="label"> <%= link_to c.name, c %> </span>
+   <% end %>
+ </h3>
+<% end %>

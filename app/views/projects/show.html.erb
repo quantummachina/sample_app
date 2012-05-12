@@ -1,88 +1,77 @@
-<!-- Muestra cada proyecto: projects/1 -->
 <% provide(:title, @project.name) %>
 
+<%= render 'show_main_h' %>
+
 <div class="row">
-  <aside class="span3">
-    <section>
-      <h1>
-        <%= gravatar_for User.find(@project.user_id) %> 
-        <%= link_to User.find(@project.user_id).name, User.find(@project.user_id) %>
-      </h1>
-    </section>
-    <section>
-      <%= render 'shared/stats' %>
-    </section>
-    <section>
-      <h3>Owned Projects (<%= User.find(@project.user_id).projects.count %>)</h3>
-      </br>
-      <%= render 'shared/project_thumbnail', projects: User.find(@project.user_id).projects, size: "3" %>
-    </section>
-  </aside>
 
 <!-- CUERPO -->
 
-  <div class="span6">
-    <table>
-      <td>
-        <% if @project.finished != true %>
-          <%= render 'collab_form' %>
-        <% end %>
-      </td>
-      <td><%= render 'like_form' %></td>
-    </table>
-    <%= render 'show_main' %> <!-- main info -->
+  <div class="span9">
+    
+    <%= render 'show_main_b' %> <!-- main info -->
+    </br>
 
-    <% if @project.updates %>
-      <%= render 'show_updates' %>
-    <% end %>
-    <% if collaborator?(@project) %>
-      <%= render 'post_update' %>
-    <% end %>
+    <div class="row">
+
+      <div class="span2">
+        <% if @project.updates %>
+          <%= render 'show_updates' %>
+        <% end %>
+        <% if collaborator?(@project) %>
+          <%= render 'post_update' %>
+        <% end %>
+      </div>
+
+      <div class="span7">
+        <h3>Board</h3>
+        <% if @project.resources %>
+          <%= render 'shared/show_resources', resources: @project.resources, size: "2" %>
+        <% end %>
+        <% if collaborator?(@project) %>
+          <%= render 'add_resource' %>
+        <% end %>
+      </div>
+    </div>
+    
+
+  </div>
+
+<!--DERECHO-->
+
+  <div class="span3">
 
     <% if @project.finished %>
       <%= render 'show_comments' %>
       <%= render 'post_comment' %>
     <% else %>
 
-    <h3>Needs:</h3>
-    <% if @project.needs %>
-      <%= render 'show_needs' %>
-    <% end %>
-    <% if collaborator?(@project) %>
-        <%= render 'post_need' %>
-    <% end %>
+      <h3>Needs:</h3>
+      <% if @project.needs %>
+        <%= render 'show_needs' %>
+      <% end %>
+      <% if collaborator?(@project) %>
+          <%= render 'post_need' %>
+      <% end %>
 
-    <h3>Tasks list:</h3>
-    <% if @project.tasks %>
-      <%= render 'show_tasks' %>
-    <% end %>
-    <% if collaborator?(@project) %>
-        <%= render 'post_tasks' %>
-    <% end %>
+      <%= render 'show_collaborators' %>
 
-    <h3>Threads:</h3>
-    <% if @user.id == @project.user.id || @project.collaborators.exists?(@user.id) %>
-      <%= render 'add_thread' %>
+      <h3>Tasks:</h3>
+      <% if @project.tasks %>
+        <%= render 'show_tasks' %>
+      <% end %>
+      <% if collaborator?(@project) %>
+          <%= render 'post_tasks' %>
+      <% end %>
+
+      <h3>Messages:</h3>
+      <% if current_user.id == @project.user.id || @project.collaborators.exists?(current_user.id) %>
+        <%= render 'add_thread' %>
+      <% end %>
+      <% if @project.thrds %>
+        <%= render 'show_thrds' %>
+      <% end %>
+
     <% end %>
-
-    <% if @project.thrds %>
-      <%= render 'show_thrds' %>
-    <% end %>
-
-  <% end %>
-  </div>
-
-<!--DERECHO-->
-
-  <div class="span3">
-    <h3>Resources</h3>
-    <% if @project.resources %>
-      <%= render 'shared/show_resources', resources: @project.resources %>
-    <% end %>
-    </br>
-    <% if collaborator?(@project) %>
-      <%= render 'add_resource' %>
-   <% end %>
   </div>
   
 </div>

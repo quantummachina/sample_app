@@ -1,4 +1,4 @@
 <%= render 'shared/add_inspiration' %>
 <% if current_user.inspirations %>
-	<%= render 'shared/show_inspirations', inspirations: current_user.inspirations, size: "2" %>
+	<%= render 'shared/show_resources', resources: current_user.inspirations, size: "2" %>
 <% end %>

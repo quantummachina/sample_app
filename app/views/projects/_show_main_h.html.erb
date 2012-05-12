@@ -1,7 +1,7 @@
 <h1><%= @project.name %></h1>
 
 <div class="row">
-  <div class="span6">
+  <div class="span8">
     <h5>
     <% if @project.place != "" %>
     <%= " " + @project.place + ", " %>
@@ -28,28 +28,3 @@
     </table>
   </div>
 </div>
-
-</br>
-
-<div class="row">
-  <div class="span3">
-    <h4><%= @project.description %></h4>
-  </div>
-  <div class="span6">
-    <%= render 'thumbnail' %>
-  </div>
-</div>
-</br>
-<!-- render show_collaborators--> 
-<h5>
- <%=profit?(@project.profitable)%>
-  ,  <%=online?(@project.online)%>, 
-  <%=finished?(@project.finished)%>. --- 
-
-  <% if current_user?(@project.user) %>
-      <%= link_to "delete", @project, method: :delete,
-                                       confirm: "No please! we won't survive without it :'(",
-                                       title: @project.name %>
-      <%= link_to "edit", edit_project_path(@project) %>
-  <% end %>
-  </h5>
