@@ -32,7 +32,10 @@
         <% end %>
       </div>
     </div>
-    
+    <% if @project.resources %>
+    <div class="span5 offset2">
+    <%= render 'carrousel', resources: @project.resources %>
+    </div><%end%>
 
   </div>
 
@@ -45,33 +48,66 @@
       <%= render 'post_comment' %>
     <% else %>
 
-      <h3>Needs:</h3>
-      <% if @project.needs %>
-        <%= render 'show_needs' %>
-      <% end %>
-      <% if collaborator?(@project) %>
-          <%= render 'post_need' %>
-      <% end %>
-
       <%= render 'show_collaborators' %>
 
-      <h3>Tasks:</h3>
-      <% if @project.tasks %>
-        <%= render 'show_tasks' %>
-      <% end %>
-      <% if collaborator?(@project) %>
-          <%= render 'post_tasks' %>
-      <% end %>
+      <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              <h3>Tasks:</h3>
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <% if @project.tasks %>
+                <%= render 'show_tasks' %>
+              <% end %>
+              <% if collaborator?(@project) %>
+                <%= render 'post_tasks' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+               <h3>Needs:</h3>
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <% if @project.needs %>
+                <%= render 'show_needs' %>
+              <% end %>
+              <% if collaborator?(@project) %>
+                  <%= render 'post_need' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+              <h3>Messages:</h3>
+            </a>
+          </div>
+          <div id="collapseThree" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <% if current_user.id == @project.user.id || @project.collaborators.exists?(current_user.id) %>
+                <%= render 'add_thread' %>
+              <% end %>
+              <% if @project.thrds %>
+                <%= render 'show_thrds' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h3>Messages:</h3>
-      <% if current_user.id == @project.user.id || @project.collaborators.exists?(current_user.id) %>
-        <%= render 'add_thread' %>
-      <% end %>
-      <% if @project.thrds %>
-        <%= render 'show_thrds' %>
-      <% end %>
+ <% end %>
 
-    <% end %>
-  </div>
   
 </div>
+
+
+  </div>
