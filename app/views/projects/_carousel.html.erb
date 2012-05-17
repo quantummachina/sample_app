@@ -1,0 +1,14 @@
+<!--recibe resources--> 
+  <div id="myCarousel" class="carousel slide" interval="5000" >
+    <div class="carousel-inner">
+    	<% for resource in resources do %>
+    	  <% if resource.id %>
+	    	  <div class= "<%= if resource == resources.first then "item active" else "item" end %>">
+	    	    <%= resource.content_html %>
+	 	     </div>
+	 	  <% end %>
+	    <% end %>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  </div>

@@ -1,18 +1,21 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3' # jalando antes de bootstraps'3.2.1'
-gem 'bootstrap-sass', '2.0.0'
+#gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-generators', '~> 2.0', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
+gem 'simple_form', '~> 2.0' #for bootstraps generator
+
 gem 'bcrypt-ruby', '3.0.1'
-gem 'faker', '1.0.1'
-gem 'will_paginate', '3.0.3'
+gem 'faker', '1.0.1' #?
+gem 'will_paginate', '3.0.3' #needed after bootstraps_will?paginate?
 gem 'bootstrap-will_paginate', '0.0.5'
-gem "remotipart", "~> 1.0"
+gem "remotipart", "~> 1.0" #? 
 gem "auto_html", git: 'git://github.com/quantummachina/auto_html.git'
-gem 'calendar_date_select' #, :git => 'git://github.com/paneq/calendar_date_select.git'
-gem 'paperclip'
-gem 'aws-s3'
+gem 'calendar_date_select', :git => 'git://github.com/paneq/calendar_date_select.git'
+gem 'paperclip' #attachments
+gem 'aws-s3' #amazon s3
 gem 'aws-sdk'
-gem 'httparty'
+gem 'httparty' #soundcloud in auto_html
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
