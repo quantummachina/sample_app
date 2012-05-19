@@ -77,7 +77,7 @@ SampleApp::Application.routes.draw do
   match '/publish', to: 'ideas#publish'
   match '/board', to: 'inspirations#index'
 
-  root to: 'static_pages#home' #'projects#index' 
+  root to: 'users#home' #'projects#index' 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

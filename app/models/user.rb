@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
     has_many :liked_projects, through: :likes, source: :project
     has_many :thrds
     has_many :commenthrds
+    has_many :updates
     has_many :responsibilities, foreign_key: :responsible
     has_many :inspirations
     has_many :conversations

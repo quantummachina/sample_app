@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508185343) do
+ActiveRecord::Schema.define(:version => 20120519043940) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -49,6 +49,11 @@ ActiveRecord::Schema.define(:version => 20120508185343) do
   end
 
   add_index "comments", ["project_id", "created_at"], :name => "index_comments_on_project_id_and_created_at"
+
+  create_table "converelations", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "conversations", :force => true do |t|
     t.integer  "user_id"
@@ -217,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20120508185343) do
     t.string   "content",    :default => ""
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+    t.integer  "user_id"
   end
 
   add_index "updates", ["project_id"], :name => "index_updates_on_project_id"

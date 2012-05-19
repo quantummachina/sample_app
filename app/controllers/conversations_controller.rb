@@ -3,11 +3,13 @@ class ConversationsController < ApplicationController
   before_filter :correct_user, only: :destroy
 
   def index
+    #debugger
   	@conversations = current_user.conversations + current_user.reverse_conversations
+    @conversation = if params[:id] then Conversation.find(params[:id]) else @conversations.first end
   end
 
   def show
-  	@conversation = Conversation.find(params[:id])
+    redirect_to action: 'index', id: params[:id]
   end
 
   def create

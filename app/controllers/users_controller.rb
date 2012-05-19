@@ -5,6 +5,19 @@ class UsersController < ApplicationController
   before_filter :admin_user, only: :destroy
   #before_filter :admin_asshole, only: :
 
+  def home
+    if signed_in?
+      #.paginate(page: params[], per_page:)
+      @micropost  = current_user.microposts.build
+      @feed_items = current_user.feed.paginate(page: params[:microposts], per_page: 10)
+      @conversations = current_user.conversations + current_user.reverse_conversations.paginate(page: params[:conversations], per_page: 3)
+      @pliked = current_user.liked_projects.paginate(page: params[:pliked], per_page: 3)
+      @powned = current_user.projects.paginate(page: params[:powned], per_page: 3)
+      @pcollaborations = current_user.collaborations.paginate(page: params[:pcollaborations], per_page: 3)
+
+    end
+  end
+
 	def new
     	@user = User.new
     end

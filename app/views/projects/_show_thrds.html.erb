@@ -1,15 +1,19 @@
 <% for t in @project.thrds do %>
   <% if t.id %>
-    <ol>
+  <dl>
+    <dt>
       <h4><%= t.content%><% if collaborator?(@project) %><%= render 'shared/rem', obj: t %><% end %></h4>
-      <% if t.commenthrds %>
-        <ol>
+      <p> <%=  render 'shared/wnt', obj: t %></p>
+    </dt>
+    <% if t.commenthrds %>
+      <dd>
         <% for comment in t.commenthrds do %>
-          <p><%= comment.comment %><% if collaborator?(@project) %><%= render 'shared/rem', obj: comment%><% end %></p>
+          <h5><%= comment.comment %><% if collaborator?(@project) %><%= render 'shared/rem', obj: comment%><% end %></h5>
+          <p> <%=  render 'shared/wnt', obj: t %></p>
         <% end %>
-        </ol>
-      <% end %>
-      <ol><%= render 'add_commenthrd', thrd: t %></ol>
-    </ol>
+      </dd>
+    <% end %>
+      <dc><%= render 'add_commenthrd', thrd: t %></dc>
+  </dl>
   <% end %>
 <% end %>

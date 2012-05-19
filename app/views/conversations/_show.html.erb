@@ -1,4 +1,3 @@
-<!-- not used anymore because embeded in index-->
 <h3><%= "With: " + (if @conversation.interlocutor.id != current_user.id then @conversation.interlocutor.name else @conversation.user.name end) %></h3>
 	<%= render "new_line" %>
 	<dl class="dl-horizontal">

@@ -1,16 +1,9 @@
-<ul class="thumbnails">
   <% @user.ideas.each do |c| %>
-    <li class ="span4">
-      <h4> <%= c.thought %> </h4>
-      <span class="timestamp">
-        Thought <%= time_ago_in_words(c.created_at) %> ago.
-      </span>
+    <h4> <%= c.thought %> </h4>
+    <p><small>
+      Thought <%= time_ago_in_words(c.created_at) %> ago.
       <% if @user == current_user %>
-        <%= link_to "[Publish]", publish_idea_path(c) %>
-        <%= link_to "[x]", c, method: :delete,
-                                   confirm: "Isn't a valuable idea anymore?",
-                                   title: @user.name%>
-                                   <% end %>
-    </li>
+        <%= render 'shared/rem', obj: c %>
+      <% end %>
+    </small></p>
   <% end %>
-</ul>

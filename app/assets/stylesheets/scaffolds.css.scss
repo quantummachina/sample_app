@@ -27,6 +27,13 @@ div {
   &.field, &.actions {
     margin-bottom: 10px; } }
 
+/*.field {
+  height: 5em;
+}*/ /*asi se referencia una clase*/
+.micropost_field{
+  height: 5em;
+}
+
 #notice {
   color: green; }
 

@@ -3,4 +3,6 @@ class Commenthrd < ActiveRecord::Base
 
   belongs_to :thrd
   belongs_to :user
+
+  default_scope order: 'commenthrds.created_at ASC'
 end

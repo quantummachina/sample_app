@@ -1,8 +1,9 @@
 <h3>Updates:</h3>
 <% for update in @project.updates do %>
-  <ol>
+  <h5>
     <%= update.content %>  <% if collaborator?(@project) %>
     <%= render 'shared/rem', obj: update %>
                                    <% end %>
-  </ol>
+  </h5>
+  <p><%=  render 'shared/wnt', obj: update %></p>
 <% end %>

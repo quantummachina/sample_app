@@ -1,8 +1,9 @@
 <h1>Messages</h1>
-<ul>
-	<% for conversation in @conversations do %>
-		<li>
-			<h3><%= link_to "With: "+ (if conversation.interlocutor.id != current_user.id then conversation.interlocutor.name else conversation.user.name end), conversation  %></h3>
-		</li>
-	<% end %>
-</ul>
+<div class="row">
+	<div class="span4">
+		<%= render 'shared/messages' %>
+	</div>
+	<div class="span6">
+		<%= render 'show' %>
+	</div>
+</div>
