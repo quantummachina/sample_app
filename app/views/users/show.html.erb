@@ -35,9 +35,11 @@
 
     <h3>Owned Projects (<%= @user.projects.count %>)</h3>
     </br>
-    <%= render 'shared/project_thumbnail', projects: @projects, size: 2 %> 
-    <%= will_paginate @projects, param_name: :projects_page%>
-    </br>
+    <% if @user.projects %>
+      <%= render 'shared/project_thumbnail', projects: @projects, size: 2 %> 
+      <%= will_paginate @projects, param_name: :projects_page %>
+      </br>
+    <% end %>
 
     <h3>Collaborations (<%= @user.collaborations.count %>)</h3>
     </br>

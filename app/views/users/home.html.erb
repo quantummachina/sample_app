@@ -27,16 +27,22 @@
       <%= render 'shared/messages' %>
 
     <h2> Projects currently collaborating in (<%= @pcollaborations.count %>)</h2>
-    <%= render 'shared/project_thumbnail', projects: @pcollaborations, size: 2 %> 
-    <%= will_paginate @pcollaborations, param_name: :pcollaborations %>
+    <% if @pcollaborations %>
+      <%= render 'shared/project_thumbnail', projects: @pcollaborations, size: 2 %> 
+      <%= will_paginate @pcollaborations, param_name: :pcollaborations %>
+      <% end %>
 
     <h2> Liked Projects: (<%= @pliked.count %>)</h2>
-    <%= render 'shared/project_thumbnail', projects: @pliked, size: 2 %> 
-    <%= will_paginate @pliked, param_name: :pliked%>
+    <% if @pliked %>
+      <%= render 'shared/project_thumbnail', projects: @pliked, size: 2 %> 
+      <%= will_paginate @pliked, param_name: :pliked%>
+    <% end %>
 
     <h2> Owned Projects: (<%= @powned.count %>)</h2>
-    <%= render 'shared/project_thumbnail', projects: @powned, size: 2 %> 
-    <%= will_paginate @powned, param_name: :powned %>
+    <% if @powned %>
+      <%= render 'shared/project_thumbnail', projects: @powned, size: 2 %> 
+      <%= will_paginate @powned, param_name: :powned %>
+      <% end %>
 
   </div>
 <!--right-->
