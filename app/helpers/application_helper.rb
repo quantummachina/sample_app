@@ -25,6 +25,8 @@ module ApplicationHelper
 				end
 			end
 			um
+		else
+			0
 		end
 	end
 
