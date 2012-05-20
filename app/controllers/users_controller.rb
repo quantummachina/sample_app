@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       @pliked = current_user.liked_projects.paginate(page: params[:pliked], per_page: 3)
       @powned = current_user.projects.paginate(page: params[:powned], per_page: 3)
       @pcollaborations = current_user.collaborations.paginate(page: params[:pcollaborations], per_page: 3)
-
     end
   end
 

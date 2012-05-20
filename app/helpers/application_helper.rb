@@ -16,14 +16,16 @@ module ApplicationHelper
 	end
 
 	def unread_mail
-		conversations = current_user.conversations + current_user.reverse_conversations
-		um = 0
-		for c in conversations do 
-			if c.lines.first.user_id != current_user.id
-				um=um+1
+		if signed_in?
+			conversations = current_user.conversations + current_user.reverse_conversations
+			um = 0
+			for c in conversations do 
+				if c.lines.first.user_id != current_user.id
+					um=um+1
+				end
 			end
+			um
 		end
-		um
 	end
 
 end

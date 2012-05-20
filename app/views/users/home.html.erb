@@ -2,65 +2,65 @@
 
 <% if signed_in? %>
 
-<div class="row">
-  <aside class="span3">
-    <section>
-      <%= render 'shared/user_info' %>
-    </section>
-    <section>
-      <%= render 'shared/stats' %>
-    </section>
-    <section>
-          <h2 class="micropost">What's up?</h2>
-          <%= render 'shared/micropost_form' %>
-    </section>
-    <section>
-    <h3> Micropost Feed </h3>
-    <%= render 'shared/feed' %>
-    <div class="pagination"><%= will_paginate @feed_items, param_name: :microposts %></div>
-    </section>
-  </aside>
+  <div class="row">
+    <aside class="span3">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        <%= render 'shared/stats' %>
+      </section>
+      <section>
+            <h2 class="micropost">What's up?</h2>
+            <%= render 'shared/micropost_form' %>
+      </section>
+      <section>
+      <h3> Micropost Feed </h3>
+      <%= render 'shared/feed' %>
+      <div class="pagination"><%= will_paginate @feed_items, param_name: :microposts %></div>
+      </section>
+    </aside>
 
-<!--center-->
-  <div class="span6">
-    <h2>Messages</h2>
-      <%= render 'shared/messages' %>
+  <!--center-->
+    <div class="span6">
+      <h2>Messages</h2>
+        <%= render 'shared/messages' %>
 
-    <h2> Projects currently collaborating in (<%= @pcollaborations.count %>)</h2>
-    <% if @pcollaborations %>
-      <%= render 'shared/project_thumbnail', projects: @pcollaborations, size: 2 %> 
-      <%= will_paginate @pcollaborations, param_name: :pcollaborations %>
+      <h2> Projects currently collaborating in (<%= @pcollaborations.count %>)</h2>
+      <% if @pcollaborations %>
+        <%= render 'shared/project_thumbnail', projects: @pcollaborations, size: 2 %> 
+        <%= will_paginate @pcollaborations, param_name: :pcollaborations %>
+        <% end %>
+
+      <h2> Liked Projects: (<%= @pliked.count %>)</h2>
+      <% if @pliked %>
+        <%= render 'shared/project_thumbnail', projects: @pliked, size: 2 %> 
+        <%= will_paginate @pliked, param_name: :pliked %>
       <% end %>
 
-    <h2> Liked Projects: (<%= @pliked.count %>)</h2>
-    <% if @pliked %>
-      <%= render 'shared/project_thumbnail', projects: @pliked, size: 2 %> 
-      <%= will_paginate @pliked, param_name: :pliked%>
-    <% end %>
+      <h2> Owned Projects: (<%= @powned.count %>)</h2>
+      <% if @powned %>
+        <%= render 'shared/project_thumbnail', projects: @powned, size: 2 %> 
+        <%= will_paginate @powned, param_name: :powned %>
+        <% end %>
 
-    <h2> Owned Projects: (<%= @powned.count %>)</h2>
-    <% if @powned %>
-      <%= render 'shared/project_thumbnail', projects: @powned, size: 2 %> 
-      <%= will_paginate @powned, param_name: :powned %>
+    </div>
+  <!--right-->
+    <div class="span3">
+      <h3>Ideas (<%= current_user.ideas.count %>)</h3>
+      <% if @user.ideas %>
+        <%= render 'show_ideas' %>
       <% end %>
-
+    </div>
   </div>
-<!--right-->
-  <div class="span3">
-    <h3>Ideas (<%= current_user.ideas.count %>)</h3>
-    <% if @user.ideas %>
-      <%= render 'show_ideas' %>
-    <% end %>
-  </div>
-</div>
 
 <% else %>
 
-<div class="center hero-unit">
+  <div class="center hero-unit">
+    <h1>FunkApp</h1>
+    <h2>This is the home page for the <a href="http://funkalab.com/">Funka Lab</a> sample application</h2>
 
-  <h1>FunkApp</h1>
-  <h2>This is the home page for the <a href="http://funkalab.com/">Funka Lab</a> sample application</h2>
-
-  <%= link_to "Sign up now!", signup_path , class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign up now!", signup_path , class: "btn btn-large btn-primary" %>
   </div>
+
 <% end %>
