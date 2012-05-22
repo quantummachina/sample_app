@@ -19,4 +19,11 @@ class ResourcesController < ApplicationController
       format.js
     end
   end
+
+  def crosspost
+    @project = Project.find(params[:project_id])
+    @project.resources.create(content: params[:content])
+    redirect_to @project
+  end
+
 end

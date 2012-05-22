@@ -20,13 +20,6 @@
 
 <!-- BODY -->
   <div class="span8">
-    </br>
-    <h3>Ideas! (<%= @user.ideas.count %>)</h3>
-    </br>
-    <% if @user.ideas %>
-      <%= render 'show_ideas' %>
-    <% end %>
-    </br>
     <h3>Liked Projects (<%= @user.liked_projects.count %>)</h3>
     </br>
     <% if @user.likes %>

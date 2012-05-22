@@ -33,10 +33,18 @@ SampleApp::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only:[:create, :destroy]
   resources :collabs, only:[:create, :destroy]
-  resources :resources, only:[:create, :destroy]
-  resources :inspirations, only:[:create, :destroy, :index]
+  resources :resources, only:[:create, :destroy] do
+    member do
+      get :crosspost
+    end
+  end
+  resources :inspirations, only:[:create, :destroy, :index] do
+      member do
+      get :crosspost
+    end
+  end
   resources :needs
-  resources :tasks, only:[:create, :destroy, :check] do
+  resources :tasks, only:[:create, :destroy] do #quito :check dentro de only porque al parecer no se necesita
     member do
       get :check
     end

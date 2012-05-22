@@ -22,4 +22,9 @@ class InspirationsController < ApplicationController
   	inspirations = current_user.inspirations
   end
 
+  def crosspost
+    current_user.inspirations.create(content: params[:content])
+    redirect_to "/board"
+  end
+
 end

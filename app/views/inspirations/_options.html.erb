@@ -1,0 +1,21 @@
+<!-- requires obj -->
+<ul class="nav nav-pills">
+<li class="dropdown" id="<%= "options"+obj.id.to_s%>">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="<%= "#options"+obj.id.to_s%>">
+		<i class="icon-cog"></i>
+		<b class="dropdown-menu"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li>Share in Board:</li>
+		<li class="divider"></li>
+		<li><%= link_to "Personal", controller: "inspirations", action:"crosspost", content: obj.content %></li>
+		<li class="divider"></li>
+		<% for p in current_user.collaborations %>
+			<li><%= link_to p.name, controller: "resources", action:"crosspost", project_id: p.id, content: obj.content %></li>
+		<% end %>
+		<li class="divider"></li>
+		<li class="divider"></li>
+		<li><%= render 'shared/rem', obj: obj %></li>
+	</ul>                                
+</li>
+</ul>

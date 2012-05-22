@@ -16,7 +16,7 @@ class IdeasController < ApplicationController
     @user = User.find(Idea.find(params[:id]).user_id)
     Idea.find(params[:id]).destroy
 	respond_to do |format|
-      format.html { redirect_to @user }
+      format.html { redirect_to root_path }
       format.js
     end
   end

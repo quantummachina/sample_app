@@ -2,8 +2,10 @@
 
 	<% for resource in resources do %>
 	  <% if resource.id %>
+
   	    <div class = <%="span#{size}" %> ><%= resource.content_html %>
-          <%= render 'shared/rem', obj: resource %>
+  	    		  <%= render 'inspirations/options', obj: resource %>
+          <!--%= render 'shared/rem', obj: resource %-->
   	    </div>
   	  <% end %>
 	<% end %>

@@ -21,8 +21,10 @@ module ApplicationHelper
 			um = 0
 			for c in conversations do 
 				if c.lines.first
-					if c.lines.first.user_id != current_user.id
-						um=um+1
+					if c.lines.first.id
+						if c.lines.first.user_id != current_user.id
+							um=um+1
+						end
 					end
 				end
 			end

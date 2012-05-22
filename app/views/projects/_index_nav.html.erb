@@ -1,8 +1,7 @@
 <h3>Sort by:</h3>
 <%= form_tag '/nav' do%>
-	<%= select_tag "category", options_from_collection_for_select( @categories, "id", "name", selected: @cat_indx), multiple: false, prompt: "All" %> <!-- solucion parcial, hay que incluir el all como seleccionable -->
-
-	 
+	<%= select_tag "category", options_from_collection_for_select( @categories, "id", "name", selected: @cat_indx), multiple: false, prompt: "All", class: "span2" %>
+ 
 	<!-- %= check_box_tag :online, true, 'active' % --> <!-- %= label_tag 'Online'% --> 
 	<!--%= check_box_tag :offline, true, 'active' %--> <!--%= label_tag 'Offline'% -->
 
