@@ -1,10 +1,10 @@
 <!--recibe resources--> 
-  <div id="myCarousel" class="carousel slide" interval="5000" >
+  <div id="myCarousel" class="carousel slide">
     <div class="carousel-inner">
     	<% for resource in resources do %>
     	  <% if resource.id %>
 	    	  <div class= "<%= if resource == resources.first then "item active" else "item" end %>">
-	    	    <%= resource.content_html %>
+	    	    <%= embedded(resource.content, 7) %>
 	 	     </div>
 	 	  <% end %>
 	    <% end %>

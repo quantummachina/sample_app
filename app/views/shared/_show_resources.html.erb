@@ -1,10 +1,35 @@
 <!-- Require resources and size -->
-
 	<% for resource in resources do %>
 	  <% if resource.id %>
 
-  	    <div class = <%="span#{size}" %> ><%= resource.content_html %>
-  	    		  <%= render 'inspirations/options', obj: resource %>
+  	    <div class = <%="span#{size}" %> >
+
+  	    	<%= embedded(resource.content, size.to_i) %>
+
+  	    	<!--%= resource.content_html %-->
+  	    		  <!--%= render 'inspirations/options', obj: resource, header: header %-->
+
+<ul class="nav nav-pills">
+<li class="dropdown" id="<%= "options"+resource.id.to_s+header.to_s%>">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="<%= "#options"+resource.id.to_s+header.to_s%>">
+		<i class="icon-cog"></i>
+		<b class="dropdown-menu"></b>
+	</a>
+	<ul class="dropdown-menu">
+		<li>Share in Board:</li>
+		<li class="divider"></li>
+		<li><%= link_to "Personal", controller: "inspirations", action:"crosspost", content: resource.content %></li>
+		<li class="divider"></li>
+		<% for p in current_user.collaborations %>
+			<li><%= link_to p.name, controller: "resources", action:"crosspost", project_id: p.id, content: resource.content %></li>
+		<% end %>
+		<li class="divider"></li>
+		<li class="divider"></li>
+		<li><%= render 'shared/rem', obj: resource %></li>
+	</ul>                                
+</li>
+</ul>
+
           <!--%= render 'shared/rem', obj: resource %-->
   	    </div>
   	  <% end %>

@@ -25,17 +25,16 @@
       <div class="span7">
         <h3>Board</h3>
         <% if @project.resources %>
-          <%= render 'shared/show_resources', resources: @project.resources, size: "2" %>
+          <%= render 'shared/show_resources', resources: @project.resources, size: "2", header: false %>
         <% end %>
         <% if collaborator?(@project) %>
           <%= render 'add_resource' %>
         <% end %>
       </div>
     </div>
-    <% if @project.resources %>
-    <div class="span5 offset2">
-    <%= render 'carousel', resources: @project.resources %>
-    </div><%end%>
+    <div class="span7">
+      <%= render 'carousel', resources: @project.resources %>
+    </div>
 
   </div>
 
